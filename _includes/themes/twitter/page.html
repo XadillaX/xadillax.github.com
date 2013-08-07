@@ -1,9 +1,15 @@
-<div class="page-header">
-  <h1>{{ page.title }} {% if page.tagline %} <small>{{ page.tagline }}</small>{% endif %}</h1>
+<div class="gridcol-1">
+    <h1 class="pattern">
+        <span>
+            {{page.title}}
+        </span>
+    </h1>
+
+    <div class="rich-content">
+        {{ content }}
+    </div>
 </div>
 
-<div class="row-fluid">
-  <div class="span12">
-    {{ content }}
-  </div>
+<div class="gridcol-1">
+    {% include JB/comments %}
 </div>

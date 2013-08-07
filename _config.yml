@@ -9,14 +9,12 @@ pygments: true
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Jekyll Bootstrap
-tagline: Site Tagline
+title : 艾克斯の編碼者
+tagline:
 author :
-  name : Name Lastname
-  email : blah@email.test
-  github : username
-  twitter : username
-  feedburner : feedname
+  name : XadillaX
+  email : admin@xcoder.in
+  github : xadillax
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
@@ -26,7 +24,7 @@ author :
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://username.github.io
+production_url : http://127.0.0.1:4000
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -75,24 +73,16 @@ JB :
   tags_path : /tags.html
   atom_path : /atom.xml
   rss_path : /rss.xml
+  about_path : /about.html
 
   # Settings for comments helper
   # Set 'provider' to the comment provider you want to use.
   # Set 'provider' to false to turn commenting off globally.
   #
   comments :
-    provider : disqus
-    disqus :
-      short_name : jekyllbootstrap
-    livefyre :
-      site_id : 123
-    intensedebate :
-      account : 123abc
-    facebook :
-      appid : 123
-      num_posts: 5
-      width: 580
-      colorscheme: light
+    provider : duoshuo
+    duoshuo :
+      short_name : xadillax
    
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
@@ -129,3 +119,10 @@ JB :
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
   
+paginate: true
+paginate: 3
+excerpt_separator: "\n\n\n"
+markdown: pandoc
+pandoc:
+  format: html5
+  extensions: [smart, mathjax]

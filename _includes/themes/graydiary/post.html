@@ -1,0 +1,50 @@
+<div class="gridcol-1">
+    <h1 class="pattern">
+        <span>
+            {{page.title}}
+        </span>
+    </h1>
+
+    <span class="fl">
+        <span class="date">{{ page.date | date_to_long_string }}</span>
+        <span class="tags">
+            {% assign tags_list = page.tags %}
+            {% if site.JB.tags_list.provider == "custom" %}
+            {% include custom/tags_list %}
+            {% else %}
+            {% if tags_list.first[0] == null %}
+            {% for tag in tags_list %}
+            <a href="{{ BASE_PATH }}{{ site.JB.tags_path }}#{{ tag }}-ref">{{ tag }}</a>
+            {% endfor %}
+            {% else %}
+            {% for tag in tags_list %}
+            <a href="{{ BASE_PATH }}{{ site.JB.tags_path }}#{{ tag[0] }}-ref">{{ tag[0] }}</a>
+            {% endfor %}
+            {% endif %}
+            {% endif %}
+            {% assign tags_list = nil %}
+        </span>
+    </span>
+
+    <div class="cl"></div>
+
+    <div class="rich-content">
+        {{ content }}
+    </div>
+</div>
+
+<div class="gridcol-1">
+    {% if page.previous %}
+    <span class="fl"><a class="pagination" href="{{ BASE_PATH }}{{ page.previous.url }}" title="{{ page.previous.title }}">上一篇</a></span>
+    {% endif %}
+
+    {% if page.next %}
+    <span class="fr"><a class="pagination" href="{{ BASE_PATH }}{{ page.next.url }}" title="{{ page.next.title }}">下一篇</a></span>
+    {% endif %}
+
+    <div class="cl"></div>
+</div>
+
+<div class="gridcol-1">
+    {% include JB/comments %}
+</div>
