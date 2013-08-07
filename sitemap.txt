@@ -1,12 +1,12 @@
 
-http://127.0.0.1:4000/about.html
-http://127.0.0.1:4000/archive.html
-http://127.0.0.1:4000/atom.xml
-http://127.0.0.1:4000/categories.html
-http://127.0.0.1:4000/index.html
-http://127.0.0.1:4000/pages.html
-http://127.0.0.1:4000/rss.xml
-http://127.0.0.1:4000/sitemap.txt
-http://127.0.0.1:4000/tags.html
+http://xadillax.github.io/about.html
+http://xadillax.github.io/archive.html
+http://xadillax.github.io/atom.xml
+http://xadillax.github.io/categories.html
+http://xadillax.github.io/index.html
+http://xadillax.github.io/pages.html
+http://xadillax.github.io/rss.xml
+http://xadillax.github.io/sitemap.txt
+http://xadillax.github.io/tags.html
 
-http://127.0.0.1:4000/project/2013/08/07/vjudge-submitter
+http://xadillax.github.io/project/2013/08/07/vjudge-submitter

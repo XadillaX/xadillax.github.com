@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
  
  <title>艾克斯の編碼者</title>
- <link href="http://127.0.0.1:4000/" rel="self"/>
- <link href="http://127.0.0.1:4000"/>
- <updated>2013-08-08T01:25:27+08:00</updated>
- <id>http://127.0.0.1:4000</id>
+ <link href="http://xadillax.github.io/" rel="self"/>
+ <link href="http://xadillax.github.io"/>
+ <updated>2013-08-08T01:52:13+08:00</updated>
+ <id>http://xadillax.github.io</id>
  <author>
    <name>XadillaX</name>
    <email>admin@xcoder.in</email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>Vjudge Submitter</title>
-   <link href="http://127.0.0.1:4000/project/2013/08/07/vjudge-submitter"/>
+   <link href="http://xadillax.github.io/project/2013/08/07/vjudge-submitter"/>
    <updated>2013-08-07T00:00:00+08:00</updated>
-   <id>http://127.0.0.1:4000/project/2013/08/07/vjudge-submitter</id>
+   <id>http://xadillax.github.io/project/2013/08/07/vjudge-submitter</id>
    <content type="html">&lt;h3 id=&quot;welcome-to-use-vjudge-submitter&quot;&gt;WELCOME TO USE VJUDGE SUBMITTER&lt;/h3&gt;
 &lt;h4 id=&quot;whats-this&quot;&gt;WHAT’S THIS&lt;/h4&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;Virtual Judge&lt;/em&gt;&lt;/strong&gt; is something like the Polymerization of &lt;strong&gt;&lt;em&gt;Online Judge&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;

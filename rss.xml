@@ -3,10 +3,10 @@
 <channel>
         <title>艾克斯の編碼者</title>
         <description>艾克斯の編碼者 - XadillaX</description>
-        <link>http://127.0.0.1:4000</link>
-        <link>http://127.0.0.1:4000</link>
-        <lastBuildDate>2013-08-08T01:25:27+08:00</lastBuildDate>
-        <pubDate>2013-08-08T01:25:27+08:00</pubDate>
+        <link>http://xadillax.github.io</link>
+        <link>http://xadillax.github.io</link>
+        <lastBuildDate>2013-08-08T01:52:13+08:00</lastBuildDate>
+        <pubDate>2013-08-08T01:52:13+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -209,8 +209,8 @@ document.write('&lt;a h'+'ref'+'=&quot;ma'+'ilto'+':'+e+'&quot;&gt;'+e+'&lt;\/'+
 &lt;li&gt;&lt;strong&gt;&lt;em&gt;zjut&lt;/em&gt;&lt;/strong&gt;: &lt;a href=&quot;http://cpp.zjut.edu.cn/&quot;&gt;ZJUT Online Judge&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>http://127.0.0.1:4000/project/2013/08/07/vjudge-submitter</link>
-                <guid>http://127.0.0.1:4000/project/2013/08/07/vjudge-submitter</guid>
+                <link>http://xadillax.github.io/project/2013/08/07/vjudge-submitter</link>
+                <guid>http://xadillax.github.io/project/2013/08/07/vjudge-submitter</guid>
                 <pubDate>2013-08-07T00:00:00+08:00</pubDate>
         </item>
 
