@@ -78,7 +78,7 @@ The only thing you shold care is the `callback`, it should be written like that:
 
 {% highlight js %}
 function callback(status, msg, baseheader) {
-   //blahblah...
+    //blahblah...
 }
 {% endhighlight %} 
 
