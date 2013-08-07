@@ -5,8 +5,8 @@
         <description>艾克斯の編碼者 - XadillaX</description>
         <link>http://xadillax.github.io</link>
         <link>http://xadillax.github.io</link>
-        <lastBuildDate>2013-08-08T02:19:15+08:00</lastBuildDate>
-        <pubDate>2013-08-08T02:19:15+08:00</pubDate>
+        <lastBuildDate>2013-08-08T02:31:32+08:00</lastBuildDate>
+        <pubDate>2013-08-08T02:31:32+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -62,7 +62,7 @@
 
 &lt;p&gt;The only thing you shold care is the &lt;code&gt;callback&lt;/code&gt;, it should be written like that:&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;baseheader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;c1&quot;&gt;//blahblah...&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//blahblah...&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
  
