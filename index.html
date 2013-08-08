@@ -55,30 +55,47 @@
 <div class="gridcol-1">
     <h1 class="pattern">
         <span>
-            <a title="/project/2013/08/07/vjudge-submitter" href="/project/2013/08/07/vjudge-submitter">Vjudge Submitter</a>
+            <a title="/programming/2013/07/15/javascript-in-function-this-pointer-repoint" href="/programming/2013/07/15/javascript-in-function-this-pointer-repoint">关于JavaScript中callback函数的this指针重定义</a>
         </span>
     </h1>
 
     <article class="rich-content">
-        <h3 id="welcome-to-use-vjudge-submitter">WELCOME TO USE VJUDGE SUBMITTER</h3>
-<h4 id="whats-this">WHAT’S THIS</h4>
-<p><strong><em>Virtual Judge</em></strong> is something like the Polymerization of <strong><em>Online Judge</em></strong>.</p>
+        <p>最近在写<strong>NBUT Virtual Judge</strong>的内核框架，用的又是Node.JS了，把它当作一个本地运行的脚本不断进行轮询。</p>
+<p>众所周知JS中的一个精髓就是<strong>异步回调</strong>。</p>
+<p>所以在我自己写的框架中也经常会出现类似于下面的代码：</p>
+<div class="highlight"><pre><code class="js"><span class="nx">foo</span><span class="p">.</span><span class="nx">bar</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</code></pre></div>
+
+
+<p>总而言之就是写一个函数，这个函数将会调用一个回调函数。</p>
+<p>那么如果我们想在<code>function</code>中也用<code>this</code>来指代这个<code>foo</code>对象该怎么办呢？</p>
+<p>结果还是IRC有用。本人跑Node.JS的IRC上问了这个问题，结果有人就这样回复我了：</p>
+<blockquote>
+<p>13:07 &lt; shama&gt; xadillax: foo(a, b callback.bind(foo))</p>
+<p>13:10 &lt; olalonde&gt; foo (a, b fn) { fn = fn.bind(this); …. }</p>
+</blockquote>
+<p>然后还很热心地给了我个网址：https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind</p>
+<p>总之最后得出的结论就是说：</p>
+<p>你只要给你的callback函数指定一个this指针即可。</p>
+<p>如：</p>
+<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">cb</span> <span class="o">=</span> <span class="nx">callback</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">bar</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">cb</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p>这样就能在回调函数中使用<code>foo</code>来作为其<code>this</code>指针了。</p>
 
     </article>
 
     <span class="fl">
-        <span class="date">07 August 2013</span><span class="tags">
+        <span class="date">15 July 2013</span><span class="tags">
             
             
             
             
-            <a href="/tags.html#intro-ref">intro</a>
+            <a href="/tags.html#Node.js-ref">Node.js</a>
             
-            <a href="/tags.html#beginner-ref">beginner</a>
-            
-            <a href="/tags.html#jekyll-ref">jekyll</a>
-            
-            <a href="/tags.html#tutorial-ref">tutorial</a>
+            <a href="/tags.html#JavaScript-ref">JavaScript</a>
             
             
             
@@ -87,7 +104,7 @@
     </span>
 
     <span class="fr">
-        <a title="/project/2013/08/07/vjudge-submitter" href="/project/2013/08/07/vjudge-submitter">阅读全文</a>
+        <a title="/programming/2013/07/15/javascript-in-function-this-pointer-repoint" href="/programming/2013/07/15/javascript-in-function-this-pointer-repoint">阅读全文</a>
     </span>
 
     <div class="cl"></div>

@@ -9,4 +9,4 @@ http://xadillax.github.io/rss.xml
 http://xadillax.github.io/sitemap.txt
 http://xadillax.github.io/tags.html
 
-http://xadillax.github.io/project/2013/08/07/vjudge-submitter
+http://xadillax.github.io/programming/2013/07/15/javascript-in-function-this-pointer-repoint
