@@ -69,21 +69,6 @@
 
 <p>总而言之就是写一个函数，这个函数将会调用一个回调函数。</p>
 <p>那么如果我们想在<code>function</code>中也用<code>this</code>来指代这个<code>foo</code>对象该怎么办呢？</p>
-<p>结果还是IRC有用。本人跑Node.JS的IRC上问了这个问题，结果有人就这样回复我了：</p>
-<blockquote>
-<p>13:07 &lt; shama&gt; xadillax: foo(a, b callback.bind(foo))</p>
-<p>13:10 &lt; olalonde&gt; foo (a, b fn) { fn = fn.bind(this); …. }</p>
-</blockquote>
-<p>然后还很热心地给了我个网址：https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind</p>
-<p>总之最后得出的结论就是说：</p>
-<p>你只要给你的callback函数指定一个this指针即可。</p>
-<p>如：</p>
-<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">cb</span> <span class="o">=</span> <span class="nx">callback</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
-<span class="nx">foo</span><span class="p">.</span><span class="nx">bar</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">cb</span><span class="p">);</span>
-</code></pre></div>
-
-
-<p>这样就能在回调函数中使用<code>foo</code>来作为其<code>this</code>指针了。</p>
 
     </article>
 
