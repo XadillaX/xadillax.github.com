@@ -8,9 +8,9 @@ id: cv
 
 ## ZHU, Kaidi
 
-**(+86)15258297599**
+**(+86)152\*\*\*\*7599**
 
-**admin@xcoder.in**
+**admin#xcoder.in**
 
 ### LINKS & CONTACT
 
