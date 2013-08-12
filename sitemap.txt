@@ -1,13 +1,14 @@
 
-http://xadillax.github.io/archive.html
-http://xadillax.github.io/atom.xml
-http://xadillax.github.io/categories.html
-http://xadillax.github.io/curriculumvitae.html
-http://xadillax.github.io/index.html
-http://xadillax.github.io/pages.html
-http://xadillax.github.io/rss.xml
-http://xadillax.github.io/sitemap.txt
-http://xadillax.github.io/tags.html
+http://127.0.0.1:4000/archive.html
+http://127.0.0.1:4000/atom.xml
+http://127.0.0.1:4000/categories.html
+http://127.0.0.1:4000/curriculumvitae.html
+http://127.0.0.1:4000/index.html
+http://127.0.0.1:4000/pages.html
+http://127.0.0.1:4000/rss.xml
+http://127.0.0.1:4000/sitemap.txt
+http://127.0.0.1:4000/tags.html
 
-http://xadillax.github.io/programming/2013/08/08/iocp-learning-note
-http://xadillax.github.io/programming/2013/07/15/javascript-in-function-this-pointer-repoint
+http://127.0.0.1:4000/node-learning/2013/08/13/node-1-environment-in-windows
+http://127.0.0.1:4000/programming/2013/08/08/iocp-learning-note
+http://127.0.0.1:4000/programming/2013/07/15/javascript-in-function-this-pointer-repoint
