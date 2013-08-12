@@ -1,7 +1,7 @@
 ---
 layout      : post
 title       : 关于JavaScript中callback函数的this指针重定义
-category    : programming
+category    : Programming
 tags        : [ "Node.js", "JavaScript" ]
 ---
 {% include JB/setup %}
