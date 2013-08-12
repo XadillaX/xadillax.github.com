@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>IOCP学习笔记（未完待续） :: 艾克斯の編碼者</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    
+    <meta name="author" content="XadillaX">
+
+    <!-- Enable responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript" src="/assets/themes/graydiary/js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="/assets/themes/graydiary/js/main.js"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href='http://fonts.googleapis.com/css?family=Macondo' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+    <link href="/assets/themes/graydiary/css/main.css" rel="stylesheet">
+    <link href="/assets/themes/graydiary/css/syntax.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div id="back-to-top">
+        <span>▲</span>
+        <p>Top</p>
+    </div>
+
+    <div id="wrapper">
+        <div id="sidebar" class="fl">
+            <a href="http://xadillax.github.io">
+                <img class="avatar" src="https://secure.gravatar.com/avatar/564d6bd6e577a0e1859a58a0aaf82c5f?s=64" alt="艾克斯の編碼者" />
+            </a>
+            <p class="italic">艾克斯の編碼者</p>
+            <p></p>
+
+            <ul id="primary-nav">
+                <li><span class="home"></span><a href="http://xadillax.github.io">首页</a></li>
+                <li><span class="portfolio"></span><a href="http://xadillax.github.io/archive.html">存档</a></li>
+                <li><span class="contact"></span><a href="http://xadillax.github.io/categories.html">分类</a></li>
+                <li><span class="about"></span><a href="http://xadillax.github.io/curriculumvitae.html">关于</a></li>
+                <li><span class="mail"></span><a href="http://xadillax.github.io/rss.xml">订阅</a></li>
+            </ul>
+        </div>
+
+        <div id="container" class="fr">
+            <div id="main" class="fl">
+                <div class="mini-wrapper">
+                    
+<div class="gridcol-1">
+    <h1 class="pattern">
+        <span>
+            IOCP学习笔记（未完待续）
+        </span>
+    </h1>
+
+    <span class="fl">
+        <span class="date">08 August 2013</span>
+        <span class="tags">
+            
+            
+            
+            
+            <a href="/tags.html#IOCP-ref">IOCP</a>
+            
+            <a href="/tags.html#Windows-ref">Windows</a>
+            
+            <a href="/tags.html#Socket-ref">Socket</a>
+            
+            
+            
+            
+        </span>
+    </span>
+
+    <div class="cl"></div>
+
+    <article class="rich-content">
+        <p>　　网络上大部分的讲解IOCP模型文章都比较断章取义，要么是这里冒出一个术语，那边出来一个不知名的名词。</p>
+<p>　　本文主要是给那些暂时还无太多的Windows编程基础的人阅读，里面解释了一些相应的前驱知识。比如管道、重叠I/O模型等等。</p>
+<p>　　如果你已经对这些了如指掌了，可以直接忽略本文——因为本文是给那些初学者看的。</p>
+<p>　　不过即使是给初学者看的，很多概念只是提个大概，让读者心里有个印象而已。更进一步的详细知识还是需要读者自行翻阅相关资料。</p>
+<h2 id="前驱知识">前驱知识</h2>
+<h3 id="管道">管道</h3>
+<p>　　<strong>管道（PIPE）</strong>是用于进程间通信的一段共享内存。创建管道的进程称为<strong>管道服务器</strong>，连接到一个管道的进程称为<strong>管道客户机</strong>。一个进程在向管道写入数据之后，另一个进程就可以从管道的另一端将其读出来。</p>
+<p>　　管道分两种，匿名管道和命名管道。</p>
+<h4 id="匿名管道">匿名管道</h4>
+<p>　　匿名管道是在父进程和子进程间单向传输数据的一种未命名管道，只能在本地计算机中使用，而不能用于网络间通信。</p>
+<p>　　匿名管道由 <code>CreatePipe()</code> 函数创建。该函数在创建匿名管道的同时返回两个句柄：读句柄和写句柄。其原型如下：</p>
+<div class="highlight"><pre><code class="cpp"><span class="n">BOOL</span> <span class="nf">CreatePipe</span><span class="p">(</span>
+    <span class="n">PHANDLE</span> <span class="n">hReadPipe</span><span class="p">,</span>
+    <span class="n">PHANDLE</span> <span class="n">hWritePipe</span><span class="p">,</span>
+    <span class="n">LPSECURITY_ATTRIBUTES</span> <span class="n">lpPipeAttributes</span><span class="p">,</span>
+    <span class="n">DWORD</span> <span class="n">nSize</span>
+<span class="p">);</span>
+</code></pre></div>
+
+
+<blockquote>
+<p>其中 <code>hReadPipe</code> 为指向读句柄的指针， <code>hWritePipe</code> 为指向写句柄的指针； <code>lpPipeAttributes</code> 为指向安全属性的指针；最后的 <code>nSize</code> 为管道大小，若为 <code>0</code> 则由系统来决定。</p>
+</blockquote>
+<p>　　匿名管道不支持异步读写操作。</p>
+<h4 id="命名管道">命名管道</h4>
+<p>　　命名管道是在管道服务器和一台或多台管道客户机之间进行单向或者双向通信的一种命名的管道。一个命名管道的所有实例都共享同一个管道名，但是每一个实例都拥有独立的缓存和句柄，并且为 <code>客户机 - 服务器</code> 通信提供一个分离的管道。</p>
+<p>　　命名管道可以在同一台计算机的不同进程之间或者跨越一个网络的不同计算机的不同进程间进行有连接的可靠数据通信。如果连接中断，连接双方都能立即受到连接断开的信息。</p>
+<p>　　每个命名管道都有一个唯一的名字，以区分存在于系统的命名对象列表中的其它命名管道。管道服务器在调用 <code>CreateNamedPipe()</code> 函数创建管道的一个或多个实例时为其指定了名称。对于管道客户机，则是在调用 <code>CreateFile()</code> 或 <code>CallNamedPipe()</code> 函数在连接一个命名管道实例时对管道名进行指定。</p>
+<p>　　命名管道对其标识采用 <code>UNC格式</code>：</p>
+<blockquote>
+<p><code>\\Server\Pipe\[Path]Name</code></p>
+</blockquote>
+<p>　　其中第一部分 <code>\\Server</code> 指定了服务器的名字，命名管道服务就在此服务器创建。其字符串部分可以为一个小数点（表示本机）、星号（当前网络字段）、域名或者是一个真正的服务；第二部分是一个不可变化的硬编码字符串；第三部分 <code>\[Path]Name</code> 则使应用程序可以唯一定义及标识一个命名管道的名字，而且可以设置多级目录。</p>
+<p>　　管道服务器首次调用 <code>CreateNamedPipe()</code> 函数时，使用 <code>nMaxInstance</code> 参数指定了能同时存在的管道实例的最大数目。服务器可以重复调用 <code>CreateNamedPipe()</code> 函数去创建新的管道实例，直至达到设定的最大实例数。</p>
+<p>　　下面给出 <code>CreateNamedPipe()</code> 的函数原型：</p>
+<div class="highlight"><pre><code class="cpp"><span class="n">HANDLE</span> <span class="nf">CreateNamedPipe</span><span class="p">(</span>
+    <span class="n">LPCTSTR</span> <span class="n">lpName</span><span class="p">,</span>
+    <span class="n">DWORD</span> <span class="n">dwOpenMode</span><span class="p">,</span>
+    <span class="n">DWORD</span> <span class="n">dwPipeMode</span><span class="p">,</span>
+    <span class="n">DWORD</span> <span class="n">nMaxInstance</span><span class="p">,</span>
+    <span class="n">DWORD</span> <span class="n">nOutBufferSize</span><span class="p">,</span>
+    <span class="n">DWORD</span> <span class="n">nInBufferSize</span><span class="p">,</span>
+    <span class="n">DWORD</span> <span class="n">nDefaultTimeOut</span><span class="p">,</span>
+    <span class="n">LPSECURITY_ATTRIBUTES</span> <span class="n">lpSecurityAttributes</span>
+<span class="p">);</span>
+</code></pre></div>
+
+
+<blockquote>
+<p>这里的 <code>lpName</code> 就是所谓的管道名称指针了， <code>dwOpenMode</code> 为管道打开的模式（用来指示管道在创建好之后，它的传输方向、I/O控制以及安全模式）， <code>dwPipeMode</code> 为管道模式， <code>nMaxInstance</code> 正如之前所说的是最大的管道实例数， <code>nOutBufferSize</code> 为输出缓存的大小， <code>nInBufferSize</code> 为输入缓存的大小， <code>nDefaultTimeOut</code> 为超时设置，最后的 <code>lpSecurityAttributes</code> 为安全属性的指针。</p>
+</blockquote>
+<h3 id="createfile-readfile等api">CreateFile, ReadFile等API</h3>
+<h4 id="createfile">CreateFile()</h4>
+<p>　　这个函数可以创建或者打开一个对象的句柄，凭借此句柄我们就可以控制这些对象：</p>
+<ul>
+<li>控制台对象</li>
+<li>通信资源对象</li>
+<li>目录对象（只能打开）</li>
+<li>磁盘设备对象</li>
+<li>文件对象</li>
+<li>邮槽对象</li>
+<li>管道对象</li>
+</ul>
+<p>　　函数原型：</p>
+<div class="highlight"><pre><code class="cpp"><span class="n">HANDLE</span> <span class="nf">CreateFile</span><span class="p">(</span>
+    <span class="n">LPCTSTR</span> <span class="n">lpFileName</span><span class="p">,</span>
+    <span class="n">DWORD</span> <span class="n">dwDesiredAccess</span><span class="p">,</span>
+    <span class="n">DWORD</span> <span class="n">dwShareMode</span><span class="p">,</span>
+    <span class="n">LPSECURITY_ATTRIBUTES</span> <span class="n">lpSecurityAttributes</span><span class="p">,</span>
+    <span class="n">DWORD</span> <span class="n">dwCreationDisposition</span><span class="p">,</span>
+    <span class="n">DWORD</span> <span class="n">dwFlagsAndAttributes</span><span class="p">,</span>
+    <span class="n">HANDLE</span> <span class="n">hTemplateFile</span>
+<span class="p">);</span>
+</code></pre></div>
+
+
+<blockquote>
+<p><strong>参数解析</strong></p>
+<ol type="1">
+<li><p><strong><em>lpFileName：</em></strong> 一个指向无终结符的字符串指针，用来指明要创建或者打开的对象的名字。</p></li>
+<li><p><strong><em>dwDesiredAccess：</em></strong> 指明对象的控制模式。一个应用程序可以包含读控制、写控制、读/写控制、设备查询控制。</p></li>
+<li><p><strong><em>dwShareMode：</em></strong> 指定对象的共享模式。如果 <code>dwShareMode == 0</code> 则表示是互斥使用的。如果 <code>CreateFile</code> 打开成功，则别的程序只能等到当前程序关闭对象句柄 <code>CloseHandle</code> 后才能再打开或者使用。</p></li>
+<li><p><strong><em>lpSecurityAttributes：</em></strong> 一个指向 <code>SECURITY_ATTRIBUTES</code> 结构对象的指针，决定返回的句柄是否被子进程所继承。如果 <code>lpSecurityAttributes</code> 参数为 <code>NULL</code> ，句柄就不能被子进程继承。</p></li>
+<li><p><strong><em>dwCreationDisposition：</em></strong> 指明当打开的对象存在或不存在的时候各需要怎么样去处理。</p></li>
+<li><p><strong><em>dwFlagsAndAttributes：</em></strong> 指定文件属性和标志。</p></li>
+<li><p><strong><em>hTemplateFile：</em></strong> 把具有 <code>GENERIC_READ</code> 权限的句柄指定为一个模板文件。这个模板文件提供了文件属性和扩展属性，用于创建文件。</p></li>
+</ol>
+<p><strong>返回值</strong></p>
+<p>如果调用成功，返回值是一个打开文件的句柄。</p>
+<p>如果调用之前文件已经存在，且 <code>dwCreationDisposition</code> 参数为 <code>CREATE_ALWAYS</code> 或者 <code>OPEN_AWAYS</code> ，用 <code>GetLastError</code> 返回 <code>ERROR_ALREADY_EXISTS</code> （即使调用成功也会返回这个值）。如果调用之前不存在 <code>GetLastError</code> 返回 <code>0</code> 。</p>
+<p>如果调用失败，返回值是 <code>INVALID_HANDLE_VALUE</code> 。要进一步了解出错原因，调用 <code>GetLastError</code>。</p>
+</blockquote>
+<h4 id="closehandle">CloseHandle()</h4>
+<p>　　用于关掉一个打开的对象句柄。</p>
+<p>　　函数原型如下：</p>
+<div class="highlight"><pre><code class="cpp"><span class="n">BOOL</span> <span class="nf">CloseHandle</span><span class="p">(</span>
+    <span class="n">HANDLE</span> <span class="n">hObject</span>
+<span class="p">);</span>
+</code></pre></div>
+
+
+<h4 id="readfile">ReadFile()</h4>
+<p>　　<code>ReadFile()</code> 函数从文件指针指定的位置读取数据。读操作完毕之后，文件指针将根据实际读出的数据自动进行调整，除非文件句柄是以 <code>OVERLAPPED</code> 属性值打开的。如果是以 <code>OVERLAPPED</code> 打开的I/O，应用程序就需要自己手动调整文件指针。</p>
+<p>　　这个函数被设计成兼有同步和异步操作。 <code>ReadFileEx()</code> 函数则设计成只支持异步操作，异步操作允许应用程序在读文件期间可以同时进行其它的操作。</p>
+<p>　　函数原型：</p>
+<div class="highlight"><pre><code class="cpp"><span class="n">BOOL</span> <span class="nf">ReadFile</span><span class="p">(</span>
+    <span class="n">HANDLE</span> <span class="n">hFile</span><span class="p">,</span>
+    <span class="n">LPVOID</span> <span class="n">lpBuffer</span><span class="p">,</span>
+    <span class="n">DWORD</span> <span class="n">nNumberOfBytesToRead</span><span class="p">,</span>
+    <span class="n">LPDWORD</span> <span class="n">lpNumberOfBytesRead</span><span class="p">,</span>
+    <span class="n">LPOVERLAPPED</span> <span class="n">lpOverlapped</span>
+<span class="p">);</span>
+</code></pre></div>
+
+
+<blockquote>
+<p><strong>参数解析</strong></p>
+<ol type="1">
+<li><p><strong><em>hFile：</em></strong> 文件句柄（必须具有 <code>GENERIC_READ</code> 访问权限）。</p></li>
+<li><p><strong><em>lpBuffer：</em></strong> 用来接收从文件中读出的数据的缓冲区。</p></li>
+<li><p><strong><em>nNumberOfBytesToRead：</em></strong> 指明要读取的字节总数。</p></li>
+<li><p><em><strong>lpNumberOfBytesRead：</strong></em> 一个变量指针，用来存储实际传输的字节总数。 <code>ReadFile</code> 在做所有事情（包括错误检查）之前，先将这个值赋为 <code>0</code>。当 <code>ReadFile</code> 从一个命名管道上返回 <code>TRUE</code> 时这个参数为 <code>0</code> ，说明消息管道另一端调用 <code>WriteFile</code> 时设置的 <code>nNumberOfBytesToWrite</code> 参数为 <code>0</code> 。如果 <code>lpOverlapped</code> 不是 <code>NULL</code> ， <code>lpNumberOfBytesRead</code> 可以设置为 <code>NULL</code> 。如果是一个 <code>Overlapped</code> 形式的读操作，我们可以动用 <code>GetOverlappedResult</code> 函数来获得传输的实际字节数。如果 <code>hFile</code> 关联的是一个<strong>完成端口（I/O Completion Port）</strong>，那么可以调用 <code>GetQueuedCompletionStatus</code> 函数来获得传输的实际字节数。如果完成端口被占用，而你用的是一个用于释放内存的回调例程，对于 <code>lpOverlapped</code> 参数指向的 <code>OVERLAPPED</code> 结构体来说，为这个参数指定 <code>NULL</code> 可以避免重新分配内存时发生内存泄露。内存泄露会导致返回这个参数值时是一个非法值。</p></li>
+<li><p><strong><em>lpOverlapped：</em></strong> 一个指向 <code>OVERLAPPED</code> 结构体的指针。如果 <code>hFile</code> 是以 <code>FILE_FLAG_OVERLAPPED</code> 方式获得的句柄，这个结构是必须的，不能为 <code>NULL</code> （否则函数会在错误的时刻报告读操作已经完成了）。这时，读操作在由 <code>OVERLAPPED</code> 中 <code>Offset</code> 成员指定的偏移地址开始读，并且在实际完成读操作之前就返回了。在这种情况下， <code>ReadFile</code> 返回 <code>FALSE</code> ， <code>GetLastError</code> 报告的错误类型是 <code>ERROR_IO_PENDING</code> 。这允许调用进程继续其它工作直到读操作完成。 <code>OVERLAPPED</code> 结构中的事件将会在读操作完成时被使用。</p></li>
+</ol>
+<p><strong>返回值</strong></p>
+<p>有如下任一种情况发生都会导致函数返回：</p>
+<ol type="1">
+<li>在管道另一端的写操作完成后。</li>
+<li>请求的字节数传输完毕。</li>
+<li>发生错误。</li>
+</ol>
+<p>如果函数正确，返回非零。</p>
+<p>如果返回值是非零但接受的字节数为 <code>0</code> ，那么可能是文件指针在读操作期间超出了文件的 <code>end</code> 位置。然而如果文件以 <code>FILE_FLAG_OVERLAPPED</code> 方式打开， <code>lpOverlapped</code> 参数不为 <code>NULL</code> ，文件指针在读操作期间超出了文件的 <code>end</code> 位置，那么返回值肯定是 <code>FALSE</code> ， <code>GetLastError</code> 返回的错误是 <code>ERROR_HANDLE_EOF</code> 。</p>
+</blockquote>
+<h4 id="writefile">WriteFile</h4>
+<p>　　可以以同步或异步方式向一个对象句柄中写数据。</p>
+<p>　　函数原型：</p>
+<div class="highlight"><pre><code class="cpp"><span class="n">BOOL</span> <span class="nf">WriteFile</span><span class="p">(</span>
+    <span class="n">HANDLE</span> <span class="n">hFile</span><span class="p">,</span>
+    <span class="n">LPCVOID</span> <span class="n">lpBuffer</span><span class="p">,</span>
+    <span class="n">DWORD</span> <span class="n">nNumberOfBytesToWrite</span><span class="p">,</span>
+    <span class="n">LPDWORD</span> <span class="n">lpNumberOfBytesWritten</span><span class="p">,</span>
+    <span class="n">LPOVERLAPPED</span> <span class="n">lpOverlapped</span>
+<span class="p">);</span>
+</code></pre></div>
+
+
+<p>　　其它信息与 <code>ReadFile</code> 极其相似，可以参考 <code>ReadFile</code> 。</p>
+<h3 id="winsock重叠io模型">Winsock重叠I/O模型</h3>
+<h4 id="重叠io模型的概念">重叠I/O模型的概念</h4>
+<p>　　当调用 <code>ReadFile()</code> 和 <code>WriteFile()</code> 时，如果最后一个参数 <code>lpOverlapped</code> 设置为 <code>NULL</code> ，那么线程就阻塞在这里，知道读写完指定的数据后，它们才会返回。这样在读写大文件的时候，很多时间都浪费在等待 <code>ReadFile()</code> 和 <code>WriteFile()</code> 的返回上面。如果 <code>ReadFile()</code> 和 <code>WriteFile()</code> 是往管道里面读写数据，那么有可能阻塞更久，导致程序性能下降。</p>
+<p>　　为了解决这个问题，Windows引进了<strong>重叠I/O</strong>的概念，它能够同时以多个线程处理多个I/O。其实你自己开多个线程也可以处理多个I/O，但是系统内部对I/O的处理在性能上有很大的优化。它是Windows下实现异步I/O的最常用的方式。</p>
+<p>　　Windows为几乎全部类型的文件提供这个工具：磁盘文件、通信端口、命名管道和套接字。通常，使用 <code>ReadFile()</code> 和 <code>WriteFile()</code> 就可以很好地执行重叠I/O。</p>
+<p>　　重叠模型的核心是一个重叠数据结构。若想以重叠方式使用文件，必须用 <code>FILE_FLAG_OVERLAPPED</code> 标志打开它，例如：</p>
+<div class="highlight"><pre><code class="cpp"><span class="n">HANDLE</span> <span class="n">hFile</span> <span class="o">=</span> <span class="n">CreateFile</span><span class="p">(</span>
+    <span class="n">lpFileName</span><span class="p">,</span>
+    <span class="n">GENERIC_READ</span> <span class="o">|</span> <span class="n">GENERIC_WRITE</span><span class="p">,</span>
+    <span class="n">FILE_SHARE_READ</span> <span class="o">|</span> <span class="n">FILE_SHARE_WRITE</span><span class="p">,</span>
+    <span class="nb">NULL</span><span class="p">,</span>
+    <span class="n">OPEN_EXISTING</span><span class="p">,</span>
+    <span class="n">FILE_FLAG_OVERLAPPED</span><span class="p">,</span>
+    <span class="nb">NULL</span>
+<span class="p">);</span>
+</code></pre></div>
+
+
+<p>　　如果没有规定该标志，则针对这个文件（句柄），重叠I/O是不可用的。如果设置了该标志，当调用 <code>ReadFile()</code> 和 <code>WriteFile()</code> 操作这个文件（句柄）时，必须为最后一个参数提供 <code>OVERLAPPED</code> 结构：</p>
+<div class="highlight"><pre><code class="cpp"><span class="c1">// WINBASE.H</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">_OVERLAPPED</span> <span class="p">{</span>
+    <span class="n">DWORD</span>  <span class="n">Internal</span><span class="p">;</span>
+    <span class="n">DWORD</span>  <span class="n">InternalHigh</span><span class="p">;</span>
+    <span class="n">DWORD</span>  <span class="n">Offset</span><span class="p">;</span>
+    <span class="n">DWORD</span>  <span class="n">OffsetHigh</span><span class="p">;</span>
+    <span class="n">HANDLE</span> <span class="n">hEvent</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">OVERLAPPED</span><span class="p">,</span> <span class="o">*</span><span class="n">LPOVERLAPPED</span><span class="p">;</span>
+</code></pre></div>
+
+
+<p>　　头两个32位的结构字 <code>Internal</code> 和 <code>InternalHigh</code> 由系统内部使用；其次两个32位结构字 <code>Offset</code> 和 <code>OffsetHigh</code> 使得可以设置64位的偏移量，该偏移量是要文件中读或写的地方。</p>
+<p>　　因为I/O异步发生，就不能确定操作是否按顺序完成。因此，这里没有当前位置的概念。对于文件的操作，总是规定该偏移量。<strong>在数据流下（如COM端口或socket），没有寻找精确偏移量的方法，所以在这些情况中，系统忽略偏移量</strong>。这四个字段不应由应用程序直接进行处理或使用， <code>OVERLAPPED</code> 结构的最后一个参数是可选的事件句柄，当I/O完成时，该事件对象受信（signaled）。程序通过等待该对事件对象受信来做善后处理。</p>
+<p>　　设置了 <code>OVERLAPPED</code> 参数后， <code>ReadFile()</code> / <code>WriteFile()</code> 的调用会立即返回，这时候你可以去做其他的事（所谓异步），系统会自动替你完成 <code>ReadFile()</code> / <code>WriteFile()</code> 相关的I/O操作。你也可以同时发出几个 <code>ReadFile()</code> / <code>WriteFile()</code> 的调用（所谓重叠）。当系统完成I/O操作时，会将 <code>OVERLAPPED.hEvent</code> 置信，我们可以通过调用 <code>WaitForSingleObject</code> / <code>WaitForMultipleObjects</code> 来等待这个I/O完成通知，在得到通知信号后，就可以调用 <code>GetOverlappedResult</code> 来查询I/O操作的结果，并进行相关处理。由此可以看出， <code>OVERLAPPED</code> 结构在一个重叠I/O请求的初始化及其后续的完成之间，提供了一种沟通或通信机制。注意 <code>OVERLAPPED</code> 结构的生存周期，一般动态分配，待I/O完成后，回收重叠结构。</p>
+<p>　　以Win32重叠I/O机制为基础，自<strong>WinSock 2</strong>发布开始，重叠I/O便已集成到新的<strong>WinSock API</strong>中，比如 <code>WSARecv()</code> / <code>WSASend()</code> 。这样一来，重叠I/O模型便能适用于安装了<strong>WinSock 2</strong>的所有Windows平台。可以一次投递一个或多个WinSock I/O请求。针对那些提交的请求，在它们完成之后，应用程序可为它们提供服务（对I/O的数据进行处理）。</p>
+<p>　　相应的，要像在一个套接字上使用重叠I/O模型来处理网络数据通信，首先必须使用 <code>WSA_FLAG_OVERLAPPED</code> 这个标志来创建一个套接字，如下所示：</p>
+<div class="highlight"><pre><code class="cpp"><span class="n">SOCKET</span> <span class="n">s</span> <span class="o">=</span> <span class="n">WSASocket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STEAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">WSA_FLAG_OVERLAPPED</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p>　　创建套接字的时候，加入使用的是 <code>Socket()</code> 函数而非 <code>WSASocket()</code> 函数，那么会默认设置 <code>WSA_FLAG_OVERLAPPED</code> 标志。成功创建好了一个套接字，将其与本地接口绑定到一起以后，便可以开始进行这个套接字上的重叠I/O操作，方法是调用下述的Winsock 2函数，同时为他们制定一个 <code>WSAOVERLAPPED</code> 结构参数（<code>#define WSAOVERLAPPED OVERLAPPED // WINSOCK2.H</code>）：</p>
+<ol type="1">
+<li><code>WSASend()</code></li>
+<li><code>WSASendTo()</code></li>
+<li><code>WSARecv()</code></li>
+<li><code>WSARecvFrom()</code></li>
+<li><code>WSAIoctl()</code></li>
+<li><code>AcceptEx()</code></li>
+<li><code>TransmitFile()</code></li>
+</ol>
+<p>　　若随一个 <code>WSAOVERLAPPED</code> 结构一起调用这些函数，函数会立即返回，无论套接字是否设为锁定模式。他们依赖于 <code>WSAOVERLAPPED</code> 结构来返回一个I/O请求操作的结果。</p>
+<p>　　比起<strong>阻塞</strong>、<strong>select</strong>、<strong>WSAAsyncSelect</strong>以及<strong>WSAEventSelect</strong>等模型，<strong>Winsock</strong>的重叠I/O模型使应用程序能达到更佳的系统性能。因为它和着四种模型不同的是，使用重叠模型的应用程序通知缓冲区收发系统直接使用数据。也就是说，如果应用程序投递了一个<strong><em>10KB</em></strong>大小的缓冲区来接收数据，且数据已经到达套接字，则该数据将直接被拷贝到投递的缓冲区。而这4种模型中，数据到达并拷贝到单套接字接收缓冲区（Per Socket Buffer）中，此时应用程序会被系统通知可以读入的字节数。当应用程序调用接收函数之后，数据才从单套接字缓冲区拷贝到应用程序的缓冲区。这样就减少了一次从I/O缓冲区到应用程序缓冲区的拷贝，差别就在于此。</p>
+<p>　　实际编程时，可以投递一个0字节缓冲区的 <code>WSARecv</code> / <code>WSASend</code> 操作，这样就没有用户缓冲区与I/O操作相关联，避免了用户缓冲区的锁定（过多的锁定可能导致非分页内存池耗尽，即 <code>WSAENOBUFS</code> ），应用程序绕开单套接字缓冲区而直接与<strong>TCP Stack</strong>进行数据交互，从而避免了内存拷贝。当然，只要投递了足够多的重叠发送/接收操作，就能避免额外的内存拷贝，这时将单套接字缓冲区设置为0并不能提升性能。因为应用程序的发送缓冲区将始终被锁定直到可以下传给TCP，所以停用套接字的发送缓冲区对性能的影响比停用接收缓冲区小。然而，如果接收缓冲区被设置为0，而又未投递重叠接收操作，则进来的数据都只能停留在TCP Stack中，而TCP驱动程序的缓冲区最多只能接收窗口大小。TCP缓冲区被定位在非分页内存池中，假如很多连接发数据过来，但我们根本没有投递接收操作，则将消耗大量的非分页内存池。非分页内存池是一种有限的资源，过多的锁定可能导致非分页内存池耗尽，即 <code>WSAENOBUFS</code> 。</p>
+<p>　　在Windows NT和Windows 2000中，模重叠I/O型也允许应用程序以一种重叠方式实现对套接字连接的处理。具体的做法是在监听套接字上调用 <code>AcceptEx</code> 函数。 <code>AcceptEx</code> 是一个特殊的WinSock扩展函数，由<strong>mswsock.dll</strong>实现，使用时需包含<strong>Mswsock.h</strong>头文件，链接<strong>Mswsock.lib</strong>库文件。该函数最初的设计宗旨是在Windows NT与Windows 2000操作系统上使用Win 32的重叠I/O机制。但事实上，它也适用于WinSock 2中的重叠I/O。 <code>AcceptEx</code> 的定义如下：</p>
+<div class="highlight"><pre><code class="cpp"><span class="c1">// MSWSOCK.H</span>
+<span class="n">AcceptEx</span><span class="p">(</span>
+    <span class="n">IN</span> <span class="n">SOCKET</span> <span class="n">sListenSocket</span><span class="p">,</span>
+    <span class="n">IN</span> <span class="n">SOCKET</span> <span class="n">sAcceptSocket</span><span class="p">,</span>
+    <span class="n">IN</span> <span class="n">PVOID</span> <span class="n">lpOutputBuffer</span><span class="p">,</span>
+    <span class="n">IN</span> <span class="n">DWORD</span> <span class="n">dwReceiveDataLength</span><span class="p">,</span>
+    <span class="n">IN</span> <span class="n">DWORD</span> <span class="n">dwLocalAddressLength</span><span class="p">,</span>
+    <span class="n">IN</span> <span class="n">DWORD</span> <span class="n">dwRemoteAddressLength</span><span class="p">,</span>
+    <span class="n">OUT</span> <span class="n">LPDWORD</span> <span class="n">lpdwBytesReceived</span><span class="p">,</span>
+    <span class="n">IN</span> <span class="n">LPOVERLAPPED</span> <span class="n">lpOverlapped</span>
+<span class="p">);</span>
+</code></pre></div>
+
+
+<blockquote>
+<p><strong>参数解析</strong></p>
+<ol type="1">
+<li><p><strong><em>sListenSocket：</em></strong> 指定的是一个监听套接字。</p></li>
+<li><p><strong><em>sAcceptSocket：</em></strong> 指定的是另一个套接字，负责对进入连接请求的“接受”。 <code>AcceptEx()</code> 函数和 <code>accept()</code> 函数的区别在于，我们必须提供接受的套接字，而不是让函数自动为我们创建。正是由于要提供套接字，所以要求我们事先调用 <code>socket()</code> 或者 <code>WSASocket()</code> 函数创建一个套接字，以便通过 <code>sAcceptSocket</code> 参数，将其传递给 <code>AcceptEx()</code> 。</p></li>
+<li><p><strong><em>lpOutputBuffer：</em></strong> 指定的是一个特殊的缓冲区，因为它要负责三种数据的接收：服务器的本地地址，客户机的远程地址，以及在新建连接上接收的第一个数据块。存储顺序是： &gt; 接收到的数据块→本地地址→远程地址</p></li>
+<li><p><strong><em>dwReceiveDataLength：</em></strong> 以字节为单位，指定了在 <code>lpOutputBuffer</code> 缓冲区开头保留多大的空间，用于数据的接收。如果这个参数设为 <code>0</code> ，那么只接受连接，不伴随接受数据。</p></li>
+<li><p><strong><em>dwLocalAddressLength/dwRemoteAddressLength：<strong>* 以字节为单位，指定在 <code>lpOutputBuffer</code> 缓冲区中，保留多大空间，在一个套接字被接受的时候，用于本地和远程地址信息的保存。要注意的是，和当前采用的传送协议允许的最大地址长度比较起来，这里指定的缓冲区大小至少应多出 <code>16字节</code> 。举个例子来说，假设正在使用的是</strong></em>TCP/IP</strong>*协议，那么这里的大小应该设为 <code>sizeof(SOCKADDR_IN) + 16</code> 。</p></li>
+<li><p><strong><em>lpdwBytesReceived：</em></strong> 用于返回接收到的实际数据量。以字节为单位。只有在操作以同步方式完成的前提下，才会设置i这个参数加入 <code>AcceptEx()</code> 函数返回 <code>ERROR_IO_PENDING</code> ，那么这个参数永远都不会设置，我们必须利用完成事件通知机制，获知实际读取的字节量。</p></li>
+<li><p><strong><em>lpOverlapped：</em></strong> 它对应的是一个 <code>OVERLAPPED</code> 结构，允许 <code>AcceptEx()</code> 以一种异步方式工作。如我们早先所述，只有在一个重叠I/O应用中，该函数才需要使用事件对象通知机制（<code>hEvent</code> 字段），这是由于此时没有一个完成例程参数可供使用。</p></li>
+</ol>
+</blockquote>
+<h4 id="获取重叠io操作完成结果">获取重叠I/O操作完成结果</h4>
+<p>　　当异步I/O请求挂起之后，最终要知道I/O操作是否完成。一个重叠I/O请求最终完成后，应用程序要负责读取重叠I/O操作的结果。对于读，直到I/O完成，接收缓冲器才有效；对于写，要知道是否成功，有几种方法可以做到这点，最直接的方法是调用 <code>(WSA)GetOverlappedResult</code> ，其函数原型如下：</p>
+<div class="highlight"><pre><code class="cpp"><span class="n">WINBASEAPI</span> <span class="n">BOOL</span> <span class="n">WINAPI</span> <span class="nf">GetOverlappedResult</span><span class="p">(</span>
+    <span class="n">HANDLE</span> <span class="n">hFile</span><span class="p">,</span>
+    <span class="n">LPOVERLAPPED</span> <span class="n">lpOverlapped</span><span class="p">,</span>
+    <span class="n">LPDWORD</span> <span class="n">lpNumberOfBytesTransferred</span><span class="p">,</span>
+    <span class="n">BOOL</span> <span class="n">bWait</span>
+<span class="p">);</span>
+
+<span class="n">BOOL</span> <span class="nf">WSAGetOverlappedResult</span><span class="p">(</span>
+    <span class="n">SOCKET</span> <span class="n">s</span><span class="p">,</span>
+    <span class="n">LPWSAOVERLAPPED</span> <span class="n">lpOverlapped</span><span class="p">,</span>
+    <span class="n">LPDWORD</span> <span class="n">lpcbTransfer</span><span class="p">,</span>
+    <span class="n">BOOL</span> <span class="n">fWait</span><span class="p">,</span>
+    <span class="n">LPDWORD</span> <span class="n">lpdwFlags</span>
+<span class="p">);</span>
+</code></pre></div>
+
+
+<blockquote>
+<p><strong>参数解析</strong></p>
+<ol type="1">
+<li><p><strong><em>参数一：</em></strong> 文件/套接字句柄。</p></li>
+<li><p><strong><em>参数二：</em></strong> 参数一关联的 <code>(WSA)OVERLAPPED</code> 结构，在调用 <code>CreateFile()</code> 、 <code>WSASocket()</code> 或者 <code>AcceptEx()</code> 时指定。</p></li>
+<li><p><strong><em>参数三：</em></strong> 指向字节计数指针，负责接收一次重叠发送或者接收操作实际传输的字节数。</p></li>
+<li><p><strong><em>参数四：</em></strong> 确定命令是否等待的标志。 <code>bWait</code> 参数用于决定函数是否应该等待一次重叠操作完成。若将 <code>bWait</code> 设置为 <code>TRUE</code> ，那么知道操作完成函数才返回；若设为 <code>FALSE</code> ，而且操作仍然处于未完成状态，那么 <code>(WSA)GetOverlappedResult()</code> 函数会返回 <code>FALSE</code> 值。如 <code>(WSA)GetOverlappedResult()</code> 函数调用成功，返回值就是 <code>TRUE</code> 。这意味着我们的重叠I/O操作已经成功完成，而且由参数三 <code>lpNumberOfBytesTransferred</code> 指向的值已进行了更新。若返回值是 <code>FALSE</code> ，那么可能是由下述任何一种原因造成的：</p></li>
+</ol>
+<ul>
+<li>重叠I/O操作仍处在“待决”状态。</li>
+<li>重叠操作已经完成，但含有错误。</li>
+<li>重叠操作的完成状态不可判决，因为在提供给 <code>WSAGetOverlappedResult</code> 函数的一个或多个参数中，存在着错误。</li>
+</ul>
+<p>失败后，由 <code>lpNumberOfBytesTransferred</code> 参数指向的值不会进行更新，而且我们的应用程序调用 <code>(WSA)GetLastError()</code> 函数，检查到底是何种原因造成了调用失败以使用相应答错处理。如果错误码为 <code>SOCKET_ERROR/WSA_IO_INCOMPLETE (Overlapped I/O event is not in a signaled state)</code> 或者 <code>SOCKET_ERROR/WSA_IO_PENDING (Overlapped I/O operation is in progress)</code> ，则表明I/O仍在进行。当然这不是真正错误，任何其它错误码则真正表明一个实际错误。</p>
+</blockquote>
+
+    </article>
+</div>
+
+<div class="gridcol-1">
+    
+    <span class="fl"><a class="pagination" href="/programming/2013/07/15/javascript-in-function-this-pointer-repoint" title="关于JavaScript中callback函数的this指针重定义">上一篇</a></span>
+    
+
+    
+
+    <div class="cl"></div>
+</div>
+
+<div class="gridcol-1">
+    
+
+
+  <!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread" data-thread-key="/programming/2013/08/08/iocp-learning-note" data-title="IOCP学习笔记（未完待续）"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"xadillax"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+<!-- Duoshuo Comment END -->
+
+
+
+
+</div>
+
+
+                </div>
+            </div>
+
+            <div id="footer" class="fl">
+                <div class="mini-wrapper">
+                    <div class="gridcol-1-2">
+                        <h5 class="pattern"><span>关注我</span></h5>
+                        <ul>
+                            <li><a href="http://xadillax.github.io/rss.xml">RSS</a></li>
+                            <li><a href="https://github.com/XadillaX">GitHub</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="gridcol-1-2">
+                        <h5 class="pattern"><span>版权</span></h5>
+                        <p>© 2013 艾克斯の編碼者.</p>
+                        <p>Powered by <a href="http://jekyllrb.com">Jekyll</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cl"></div>
+        </div>
+
+        <div class="cl"></div>
+    </div>
+</body>
+</html>
