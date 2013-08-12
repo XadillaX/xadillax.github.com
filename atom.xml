@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
  
  <title>艾克斯の編碼者</title>
- <link href="http://127.0.0.1:4000/" rel="self"/>
- <link href="http://127.0.0.1:4000"/>
- <updated>2013-08-13T01:55:34+08:00</updated>
- <id>http://127.0.0.1:4000</id>
+ <link href="http://xadillax.github.io/" rel="self"/>
+ <link href="http://xadillax.github.io"/>
+ <updated>2013-08-13T01:58:47+08:00</updated>
+ <id>http://xadillax.github.io</id>
  <author>
    <name>XadillaX</name>
    <email>admin@xcoder.in</email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>一起撸Node.JS（负叁）——概述</title>
-   <link href="http://127.0.0.1:4000/node-learning/2013/08/13/node-1-environment-in-windows"/>
+   <link href="http://xadillax.github.io/node-learning/2013/08/13/node-1-environment-in-windows"/>
    <updated>2013-08-13T00:00:00+08:00</updated>
-   <id>http://127.0.0.1:4000/node-learning/2013/08/13/node-1-environment-in-windows</id>
+   <id>http://xadillax.github.io/node-learning/2013/08/13/node-1-environment-in-windows</id>
    <content type="html">&lt;p&gt;　　本系列教程主要是写给我带的那帮熊孩子们看的。我自己的 &lt;strong&gt;Node.js&lt;/strong&gt; 水平半斤八两，措辞之中也免不了有自己错误的理解，会误人子弟。但是对于初学者来说，某些自己助记的理解还是可取的。有些概念性的错误可以等他们进一步深入研究之后再自行更正。&lt;/p&gt;
 &lt;p&gt;　　由于那帮人大多还处于使用 &lt;strong&gt;M$ Windows&lt;/strong&gt; 的令人不愉快的阶段，所以本教程将会退而求其次，使其在 &lt;strong&gt;Cygwin&lt;/strong&gt; 中模拟 &lt;strong&gt;linux&lt;/strong&gt; 的命令（Windows的bat脚本实在是让人不敢恭维）。以及在这里会讲述一些 &lt;strong&gt;Git&lt;/strong&gt; 操作的初步。当然，如果你已经在使用 &lt;strong&gt;linux&lt;/strong&gt; 进行开发的话，可以跳过前面一堆令人感到厌烦的环境配置章节。或者你在使用 &lt;strong&gt;M$ Windows&lt;/strong&gt; 但却不想改变自己的脚本习惯的话，也可以选择性地跳过一些章节和步骤。&lt;/p&gt;
 &lt;!-- 我是小小分割符 --&gt;
@@ -109,9 +109,9 @@
  
  <entry>
    <title>IOCP学习笔记（未完待续）</title>
-   <link href="http://127.0.0.1:4000/programming/2013/08/08/iocp-learning-note"/>
+   <link href="http://xadillax.github.io/programming/2013/08/08/iocp-learning-note"/>
    <updated>2013-08-08T00:00:00+08:00</updated>
-   <id>http://127.0.0.1:4000/programming/2013/08/08/iocp-learning-note</id>
+   <id>http://xadillax.github.io/programming/2013/08/08/iocp-learning-note</id>
    <content type="html">&lt;p&gt;　　网络上大部分的讲解IOCP模型文章都比较断章取义，要么是这里冒出一个术语，那边出来一个不知名的名词。&lt;/p&gt;
 &lt;p&gt;　　本文主要是给那些暂时还无太多的Windows编程基础的人阅读，里面解释了一些相应的前驱知识。比如管道、重叠I/O模型等等。&lt;/p&gt;
 &lt;p&gt;　　如果你已经对这些了如指掌了，可以直接忽略本文——因为本文是给那些初学者看的。&lt;/p&gt;
@@ -378,9 +378,9 @@
  
  <entry>
    <title>关于JavaScript中callback函数的this指针重定义</title>
-   <link href="http://127.0.0.1:4000/programming/2013/07/15/javascript-in-function-this-pointer-repoint"/>
+   <link href="http://xadillax.github.io/programming/2013/07/15/javascript-in-function-this-pointer-repoint"/>
    <updated>2013-07-15T00:00:00+08:00</updated>
-   <id>http://127.0.0.1:4000/programming/2013/07/15/javascript-in-function-this-pointer-repoint</id>
+   <id>http://xadillax.github.io/programming/2013/07/15/javascript-in-function-this-pointer-repoint</id>
    <content type="html">&lt;p&gt;最近在写&lt;strong&gt;NBUT Virtual Judge&lt;/strong&gt;的内核框架，用的又是Node.JS了，把它当作一个本地运行的脚本不断进行轮询。&lt;/p&gt;
 &lt;p&gt;众所周知JS中的一个精髓就是&lt;strong&gt;异步回调&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;所以在我自己写的框架中也经常会出现类似于下面的代码：&lt;/p&gt;

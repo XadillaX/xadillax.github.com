@@ -3,10 +3,10 @@
 <channel>
         <title>艾克斯の編碼者</title>
         <description>艾克斯の編碼者 - XadillaX</description>
-        <link>http://127.0.0.1:4000</link>
-        <link>http://127.0.0.1:4000</link>
-        <lastBuildDate>2013-08-13T01:55:34+08:00</lastBuildDate>
-        <pubDate>2013-08-13T01:55:34+08:00</pubDate>
+        <link>http://xadillax.github.io</link>
+        <link>http://xadillax.github.io</link>
+        <lastBuildDate>2013-08-13T01:58:47+08:00</lastBuildDate>
+        <pubDate>2013-08-13T01:58:47+08:00</pubDate>
         <ttl>1800</ttl>
 
 
@@ -100,8 +100,8 @@
 &lt;p&gt;打开 &lt;strong&gt;&lt;a href=&quot;http://ideone.com/&quot;&gt;IDEOne&lt;/a&gt;&lt;/strong&gt;，将你的 &lt;code&gt;Hello World&lt;/code&gt; 贴到编辑框中，然后在左侧的语言栏里面选中 &lt;strong&gt;Node.JS&lt;/strong&gt; ，点击送出，你就能看到你的第一个 &lt;strong&gt;Node.JS&lt;/strong&gt; 程序的运行结果了。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;To be continued…&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 </description>
-                <link>http://127.0.0.1:4000/node-learning/2013/08/13/node-1-environment-in-windows</link>
-                <guid>http://127.0.0.1:4000/node-learning/2013/08/13/node-1-environment-in-windows</guid>
+                <link>http://xadillax.github.io/node-learning/2013/08/13/node-1-environment-in-windows</link>
+                <guid>http://xadillax.github.io/node-learning/2013/08/13/node-1-environment-in-windows</guid>
                 <pubDate>2013-08-13T00:00:00+08:00</pubDate>
         </item>
 
@@ -369,8 +369,8 @@
 &lt;p&gt;失败后，由 &lt;code&gt;lpNumberOfBytesTransferred&lt;/code&gt; 参数指向的值不会进行更新，而且我们的应用程序调用 &lt;code&gt;(WSA)GetLastError()&lt;/code&gt; 函数，检查到底是何种原因造成了调用失败以使用相应答错处理。如果错误码为 &lt;code&gt;SOCKET_ERROR/WSA_IO_INCOMPLETE (Overlapped I/O event is not in a signaled state)&lt;/code&gt; 或者 &lt;code&gt;SOCKET_ERROR/WSA_IO_PENDING (Overlapped I/O operation is in progress)&lt;/code&gt; ，则表明I/O仍在进行。当然这不是真正错误，任何其它错误码则真正表明一个实际错误。&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
-                <link>http://127.0.0.1:4000/programming/2013/08/08/iocp-learning-note</link>
-                <guid>http://127.0.0.1:4000/programming/2013/08/08/iocp-learning-note</guid>
+                <link>http://xadillax.github.io/programming/2013/08/08/iocp-learning-note</link>
+                <guid>http://xadillax.github.io/programming/2013/08/08/iocp-learning-note</guid>
                 <pubDate>2013-08-08T00:00:00+08:00</pubDate>
         </item>
 
@@ -401,8 +401,8 @@
 
 &lt;p&gt;这样就能在回调函数中使用&lt;code&gt;foo&lt;/code&gt;来作为其&lt;code&gt;this&lt;/code&gt;指针了。&lt;/p&gt;
 </description>
-                <link>http://127.0.0.1:4000/programming/2013/07/15/javascript-in-function-this-pointer-repoint</link>
-                <guid>http://127.0.0.1:4000/programming/2013/07/15/javascript-in-function-this-pointer-repoint</guid>
+                <link>http://xadillax.github.io/programming/2013/07/15/javascript-in-function-this-pointer-repoint</link>
+                <guid>http://xadillax.github.io/programming/2013/07/15/javascript-in-function-this-pointer-repoint</guid>
                 <pubDate>2013-07-15T00:00:00+08:00</pubDate>
         </item>
 
