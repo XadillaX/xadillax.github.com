@@ -84,7 +84,7 @@ JB :
     provider : duoshuo
     duoshuo :
       short_name : xadillax
-   
+
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
   # Set 'provider' to false to turn analytics off globally.
@@ -108,7 +108,7 @@ JB :
   #
   sharing :
     provider : false
-    
+
   # Settings for all other include helpers can be defined by creating 
   # a hash with key named for the given helper. ex:
   #
@@ -119,11 +119,14 @@ JB :
   # and include your custom code. Your custom file must be defined at:
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
-  
+
 paginate: true
 paginate: 3
 excerpt_separator: "\n\n\n"
 markdown: pandoc
 pandoc:
-  format: html5
-  extensions: [smart, mathjax]
+  format: html
+  extensions:
+    - smart
+    - mathjax
+    - toc
