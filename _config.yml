@@ -121,7 +121,7 @@ JB :
   # where [HELPER] is the name of the helper you are overriding.
 
 paginate: true
-paginate: 3
+paginate: 10
 excerpt_separator: "\n\n\n"
 markdown: pandoc
 pandoc:
