@@ -8,7 +8,9 @@ http://xadillax.github.io/pages.html
 http://xadillax.github.io/rss.xml
 http://xadillax.github.io/sitemap.txt
 http://xadillax.github.io/tags.html
+http://xadillax.github.io/page2/index.html
 
-http://xadillax.github.io/node-learning/2013/08/13/node-1-environment-in-windows
+http://xadillax.github.io/node-learning/2013/08/15/node-2-environment-in-windows
+http://xadillax.github.io/node-learning/2013/08/13/node-1-summary
 http://xadillax.github.io/programming/2013/08/08/iocp-learning-note
 http://xadillax.github.io/programming/2013/07/15/javascript-in-function-this-pointer-repoint

@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>一起撸Node.JS（负贰）——环境 :: 艾克斯の編碼者</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    
+    <meta name="author" content="XadillaX">
+
+    <!-- Enable responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript" src="/assets/themes/graydiary/js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="/assets/themes/graydiary/js/main.js"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href='http://fonts.googleapis.com/css?family=Macondo' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+    <link href="/assets/themes/graydiary/css/main.css" rel="stylesheet">
+    <link href="/assets/themes/graydiary/css/syntax.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div id="back-to-top">
+        <span>▲</span>
+        <p>Top</p>
+    </div>
+
+    <div id="wrapper">
+        <div id="sidebar" class="fl">
+            <a href="http://xadillax.github.io">
+                <img class="avatar" src="https://secure.gravatar.com/avatar/564d6bd6e577a0e1859a58a0aaf82c5f?s=64" alt="艾克斯の編碼者" />
+            </a>
+            <p class="italic">艾克斯の編碼者</p>
+            <p></p>
+
+            <ul id="primary-nav">
+                <li><span class="home"></span><a href="http://xadillax.github.io">首页</a></li>
+                <li><span class="portfolio"></span><a href="http://xadillax.github.io/archive.html">存档</a></li>
+                <li><span class="contact"></span><a href="http://xadillax.github.io/categories.html">分类</a></li>
+                <li><span class="about"></span><a href="http://xadillax.github.io/curriculumvitae.html">关于</a></li>
+                <li><span class="mail"></span><a href="http://xadillax.github.io/rss.xml">订阅</a></li>
+            </ul>
+        </div>
+
+        <div id="container" class="fr">
+            <div id="main" class="fl">
+                <div class="mini-wrapper">
+                    
+<div class="gridcol-1">
+    <h1 class="pattern">
+        <span>
+            一起撸Node.JS（负贰）——环境
+        </span>
+    </h1>
+
+    <span class="fl">
+        <span class="date">15 August 2013</span>
+        <span class="tags">
+            
+            
+            
+            
+            <a href="/tags.html#Node.js-ref">Node.js</a>
+            
+            <a href="/tags.html#JavaScript-ref">JavaScript</a>
+            
+            <a href="/tags.html#一起撸Node.JS-ref">一起撸Node.JS</a>
+            
+            
+            
+            
+        </span>
+    </span>
+
+    <div class="cl"></div>
+
+    <article class="rich-content">
+        <p>　　由于<a href="/node-learning/2013/08/15/node-2-environment-in-windows#linux-环境">Linux</a>中的环境搭建比较简单，所以草草略过。</p>
+<p>　　其实<a href="/node-learning/2013/08/15/node-2-environment-in-windows#windows-环境">Windows</a>下也不算麻烦，但是这里会讲一定量的别的环境的搭建。</p>
+<!-- 我是小小分割符 -->
+<h2 id="linux-环境"><a href="#linux-环境">1. Linux 环境</a></h2>
+<p>讲到这个就很简单了，跟着下面的 <strong>bash</strong> 操作即可：</p>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span><span class="nb">cd</span> /usr/local/bin
+<span class="nv">$ </span>wget http://nodejs.org/dist/v0.00.00/node-v0.00.00-linux-x00.tar.gz
+<span class="nv">$ </span>tar zxf node-v0.00.00-linux-x00.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>node-v0.00.00-linux-x00
+</code></pre></div>
+
+
+<blockquote>
+<p>其中将上方的 <strong>v0.00.00</strong> 替换成 <strong>Node.js</strong> 最新的版本号，把 <strong>x00</strong> 替换成你自己电脑的位数。</p>
+<p>也可以直接去官网 <a href="http://nodejs.org/download/">http://nodejs.org/download/</a> 找到相应的地址。</p>
+</blockquote>
+<p>最后将其的连接加入到 <code>/usr/bin</code> 下即可。</p>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span><span class="nb">cd </span>bin
+<span class="nv">$ </span>ln node /usr/bin
+<span class="nv">$ </span>ln npm /usr/bin
+</code></pre></div>
+
+
+<blockquote>
+<p><strong>注意</strong>： 该用 <code>sudo</code> 的地方就用 <code>sudo</code> 或者 <code>su</code> 。</p>
+</blockquote>
+<p>至此，<strong>Linux</strong> 下的 <strong>Node.js</strong> 环境基本搭建完毕。</p>
+<h2 id="windows-环境"><a href="#windows-环境">2. Windows 环境</a></h2>
+<h3 id="cygwin-安装和配置"><a href="#cygwin-安装和配置">2.1. Cygwin 安装和配置</a></h3>
+<p><strong><em>Cygwin</em></strong> 是一个在 <strong><em>Windows</em></strong> 平台上运行的 <strong><em>Unix</em></strong> 模拟环境。对于学习 <strong><em>Unix/Linux</em></strong> 操作环境，或者从 <strong><em>Unix</em></strong> 到 <strong><em>Windows</em></strong> 的应用程序移植，或者进行某些特殊的开发工作，尤其是使用 <strong><em>GNU工具集</em></strong> 在 <strong><em>Windows</em></strong> 上进行嵌入式系统开发，非常有用。</p>
+<h4 id="cygwin-安装"><a href="#cygwin-安装">2.1.1. Cygwin 安装</a></h4>
+<p>我们先跑到 <strong>Cygwin</strong> 的官网上去把东西下来：</p>
+<blockquote>
+<p><a href="http://cygwin.com/install.html">http://cygwin.com/install.html</a></p>
+<blockquote>
+<p>注意，最好下 <strong>x86</strong> 的包，因为我们之后要讲一个 <code>cyg-apt</code> 的脚本插件，这是一个能让 <strong>Cygwin</strong> 能跟 <strong>Linux</strong> 一样通过脚本从源安装软件包的脚本。为了方便修改，我们将其下成 <strong>x86</strong> 的版本。</p>
+</blockquote>
+</blockquote>
+<p>然后就是安装步骤了。</p>
+<center>
+<img src="http://blog-xcoder-in.qiniudn.com/cygwin-install-1.png" alt="从网络安装" />
+</center>
+<center>
+<small>[图2.1]</small>
+</center>
+
+<p>到 <strong>[图2.1]</strong> 这个步骤的时候，选择默认的 <code>Install from Internet</code> 即可。</p>
+<center>
+<img src="http://blog-xcoder-in.qiniudn.com/cygwin-install-2.png" alt="选择安装路径" />
+</center>
+<center>
+<small>[图2.2]</small>
+</center>
+
+<p>在 <strong>[图2.2]</strong> 的时候选一个安装路径。</p>
+<blockquote>
+<p><strong>注意</strong>：尽可能让这个安装路径简单，而不要是类似于</p>
+<p><code>c:\Program Files\blahblah</code></p>
+<p>这样的文件路径。</p>
+</blockquote>
+<center>
+<img src="http://blog-xcoder-in.qiniudn.com/cygwin-install-3.png" alt="本地包路径" />
+</center>
+<center>
+<small>[图2.3]</small>
+</center>
+
+<p><strong>[图2.3]</strong> 的时候选一个本地包的路径，我这里选的是 <code>e:\cygwin\tmp</code>。</p>
+<center>
+<img src="http://blog-xcoder-in.qiniudn.com/cygwin-install-4.png" alt="直连" />
+</center>
+<center>
+<small>[图2.4]</small>
+</center>
+
+<p><strong>[图2.4]</strong> 选择直接连接。</p>
+<center>
+<img src="http://blog-xcoder-in.qiniudn.com/cygwin-install-5.png" alt="163" />
+</center>
+<center>
+<small>[图2.5]</small>
+</center>
+
+<p>我们国内的用户源还是选择 <code>163</code> 的速度比较快。所以在 <strong>[图2.5]</strong> 这一步的时候就直接选用默认的 <code>163</code> 的源了。如果不是默认的话，请选中它。</p>
+<p>在 <strong>Select Package</strong> 也就是选择预安装的软件的时候，把下列表中的软件包勾选起来：</p>
+<blockquote>
+<ul>
+<li><strong>wget</strong>: 在 <strong>Utils</strong> 中</li>
+<li><strong>vim</strong>: 在 <strong>Editors</strong> 中</li>
+<li><strong>gcc</strong>: 在 <strong>Devel</strong> 中</li>
+<li><strong>gcc-g++</strong>: 在 <strong>Devel</strong> 中</li>
+<li><strong>make</strong>: 在 <strong>Devel</strong> 中</li>
+<li><strong>cmake</strong>: 在 <strong>Devel</strong> 中</li>
+</ul>
+</blockquote>
+<p>若是这些选项已经被选起来了就不用再选了，如果没有选起来则把它选中。</p>
+<p>勾选好了之后就可以下一步安装了，直至安装完毕，你就可以打开你的 <strong>Cygwin</strong> 了。</p>
+<center>
+<img src="http://blog-xcoder-in.qiniudn.com/cygwin-install-6.png" alt="Cygwin" />
+</center>
+<center>
+<small>[图2.6]</small>
+</center>
+
+<blockquote>
+<p><strong>提示</strong>：你可以点击窗口左上角的小图片，然后里面的 <strong>Options</strong> 中，你可以调整你自己的 <strong>Cygwin</strong> 外观。</p>
+</blockquote>
+<h3 id="vim-配置"><a href="#vim-配置">2.1.2. vim 配置</a></h3>
+<p>上一步我们已经选中了 <strong>vim</strong> ，也就是说我们已经在 <strong>Cygwin</strong> 中装上了 <strong>vim</strong>。但是由于这里的 <strong>vim</strong> 默认配置非常蛋疼，所以我们得改一下。</p>
+<p>在你的 <strong>Cygwin</strong> 中一句句输入下面的命令：</p>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span><span class="nb">cd</span> /home/&lt;你自己的用户名&gt;
+<span class="nv">$ </span>wget http://blog-xcoder-in.qiniudn.com/.vimrc
+<span class="nv">$ </span>mkdir .vim
+<span class="nv">$ </span><span class="nb">cd</span> .vim
+<span class="nv">$ </span>mkdir colors
+<span class="nv">$ </span><span class="nb">cd </span>colors
+<span class="nv">$ </span>wget http://blog-xcoder-in.qiniudn.com/molokai.vim
+</code></pre></div>
+
+
+<p>这样你的 <strong>vim</strong> 就用上了上面的那个地址的配置文件，当然你也可以编辑你自己的配置文件或者说从网上下别的配置文件以满足你的个性化需求。</p>
+<p><strong>vim</strong> 配置以及使用请参照：<a href="https://wiki.archlinux.org/index.php/Vim">https://wiki.archlinux.org/index.php/Vim</a></p>
+<blockquote>
+事无巨细问 <strong>ArchWiki</strong>。
+<div style="text-align: right;">
+<em>– <a href="https://github.com/kalxd">kalxd</a></em>
+</div>
+
+</blockquote>
+<h3 id="apt-cyg"><a href="#apt-cyg">2.1.3. apt-cyg</a></h3>
+<blockquote>
+<p>apt-cyg is a command-line installer for Cygwin which cooperates with Cygwin Setup and uses the same repository. The syntax is similar to apt-get.</p>
+<div style="text-align: right;">
+<em>– From apt-cyg googlecode page</em>
+</div>
+
+</blockquote>
+<p>总之意思就是说 <code>apt-cyg</code> 是类似于 <strong>Linux</strong> 中的 <code>apt-get</code>， <code>yum</code>, <code>zypper</code> 等命令行软件包安装器一样，可以通过</p>
+<ul>
+<li><code>apt-cyg install &lt;package names&gt;</code> 来安装软件包</li>
+<li><code>apt-cyg remove &lt;package names&gt;</code> 来移除软件包</li>
+<li><code>apt-cyg update</code> 来更新 setup.ini</li>
+<li><code>apt-cyg show</code> 来列出已安装的软件包</li>
+<li><code>apt-cyg find &lt;pattern(s)&gt;</code> 来查找符合条件的软件包</li>
+<li><code>apt-cyg describe &lt;pattern(s)&gt;</code> 来描述符合条件的软件包</li>
+<li><code>apt-cyg packageof &lt;commands or files&gt;</code> 来定位其父软件包</li>
+</ul>
+<h4 id="apt-cyg-安装"><a href="#apt-cyg-安装">2.1.3.1. apt-cyg 安装</a></h4>
+<p>其实也不能说是安装，纯粹是把脚本从网络上拷到自己的 <strong>Cygwin</strong> 的环境目录中。</p>
+<p>在你的 <strong>Cygwin</strong> 中输入以下命令：</p>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span><span class="nb">cd</span> /usr/local/bin
+<span class="nv">$ </span>wget http://apt-cyg.googlecode.com/svn/trunk/apt-cyg
+</code></pre></div>
+
+
+<p>这样你就“安装”好了 <strong>apt-cyg</strong> 了。不过这里用的是默认的源，所有东西都是默认的。</p>
+<p>如果你现在已经心安理得或者不想折腾了可以跳过 <strong><a href="#apt-cyg-修改">2.1.3.2. apt-cyg 修改</a></strong>，如果你想把源换成 <code>163</code> 的话那么稍微看一下吧。</p>
+<h4 id="apt-cyg-修改"><a href="#apt-cyg-修改">2.1.3.2. apt-cyg 修改</a></h4>
+<p>接下去我们要对 <strong>apt-cyg</strong> 做一些编辑。</p>
+<p>你有下面两个选择：</p>
+<ol style="list-style-type: decimal">
+<li>如果你想学习 <strong>vim</strong> 操作或者你已经熟悉了，那么直接使用 <code>vim apt-cyg</code> 来进行编辑。</li>
+<li>如果你是懒人还是想要直接编辑的话，请跑到你的 <strong>Cygwin</strong> 的安装目录，找到 <strong>usr</strong> 文件夹，飞进 <strong>local/bin</strong> 目录中去，用你自己喜欢的文本编辑器打开并编辑。</li>
+</ol>
+<p>大约是 <code>68</code> 行上下吧，有一句是：</p>
+<div class="highlight"><pre><code class="bash">  <span class="nv">mirror</span><span class="o">=</span>ftp://mirror.mcs.anl.gov/pub/cygwin
+</code></pre></div>
+
+
+<p>将其改成：</p>
+<div class="highlight"><pre><code class="bash">  <span class="nv">mirror</span><span class="o">=</span>http://mirrors.163.com/cygwin
+</code></pre></div>
+
+
+<p>还有就是大概在 <code>98</code> 行和 <code>105</code> 行左右：</p>
+<div class="highlight"><pre><code class="bash">    wget -N <span class="nv">$mirror</span>/setup.bz2
+    ...
+    wget -N <span class="nv">$mirror</span>/setup.ini
+</code></pre></div>
+
+
+<p>修改成：</p>
+<div class="highlight"><pre><code class="bash">    wget -N <span class="nv">$mirror</span>/x86/setup.bz2
+    ...
+    wget -N <span class="nv">$mirror</span>/x86/setup.ini
+</code></pre></div>
+
+
+<p>至此，你的 <strong>Cygwin</strong> 环境基本完成，以后可以再慢慢完善。</p>
+<h3 id="node.js-安装"><a href="#node.js-安装">2.2. Node.js 安装</a></h3>
+<p>这个就很简单了，打开 <strong><a href="http://nodejs.org/download/">Node.js</a></strong> 官网下载安装即可。</p>
+<blockquote>
+<p>选择 <strong>Windows Installer (.msi)</strong> 或者 <strong>Windows Binary (.exe)</strong>。</p>
+</blockquote>
+<p>安装好后就能直接在 <strong>Cygwin</strong> 里面使用了。</p>
+<h2 id="真hello-world"><a href="#真hello-world">3. 真·Hello World</a></h2>
+<p>现在，无论你是 <strong>Linux</strong> 用户还是 <strong>Windows</strong> 用户，都可以用一样的步骤来完成下面的 <code>Hello World</code> 了。</p>
+<p>随便跑一个目录里面新建一个文件并且用 <strong>vim</strong> 编辑：</p>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>vim hello.js
+</code></pre></div>
+
+
+<p>在里面输入下面的东西：</p>
+<div class="highlight"><pre><code class="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p>然后退出 <strong>vim</strong> 执行：</p>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>node hello.js
+</code></pre></div>
+
+
+<p>终于，<strong>真·Hello world</strong> 出现在了你的眼前，而不需要借助 <strong><a href="http://ideone.com/">IDEOne</a></strong> 了。</p>
+<p><strong><em>To be continued…</em></strong></p>
+
+    </article>
+</div>
+
+<div class="gridcol-1">
+    
+    <span class="fl"><a class="pagination" href="/node-learning/2013/08/13/node-1-summary" title="一起撸Node.JS（负叁）——概述">上一篇</a></span>
+    
+
+    
+
+    <div class="cl"></div>
+</div>
+
+<div class="gridcol-1">
+    
+
+
+  <!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread" data-thread-key="/node-learning/2013/08/15/node-2-environment-in-windows" data-title="一起撸Node.JS（负贰）——环境"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"xadillax"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+<!-- Duoshuo Comment END -->
+
+
+
+
+</div>
+
+
+                </div>
+            </div>
+
+            <div id="footer" class="fl">
+                <div class="mini-wrapper">
+                    <div class="gridcol-1-2">
+                        <h5 class="pattern"><span>关注我</span></h5>
+                        <ul>
+                            <li><a href="http://xadillax.github.io/rss.xml">RSS</a></li>
+                            <li><a href="https://github.com/XadillaX">GitHub</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="gridcol-1-2">
+                        <h5 class="pattern"><span>版权</span></h5>
+                        <p>© 2013 艾克斯の編碼者.</p>
+                        <p>Powered by <a href="http://jekyllrb.com">Jekyll</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cl"></div>
+        </div>
+
+        <div class="cl"></div>
+    </div>
+</body>
+</html>

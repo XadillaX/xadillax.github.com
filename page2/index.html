@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <title>分类 :: 艾克斯の編碼者</title>
+    <title>首页 :: 艾克斯の編碼者</title>
     <meta http-equiv=Content-Type content="text/html;charset=utf-8">
     
     <meta name="author" content="XadillaX">
@@ -50,121 +50,49 @@
             <div id="main" class="fl">
                 <div class="mini-wrapper">
                     
+
+
 <div class="gridcol-1">
     <h1 class="pattern">
         <span>
-            分类
+            <a title="/programming/2013/07/15/javascript-in-function-this-pointer-repoint" href="/programming/2013/07/15/javascript-in-function-this-pointer-repoint">关于JavaScript中callback函数的this指针重定义</a>
         </span>
     </h1>
 
     <article class="rich-content">
-        
-
-<ul class="tag_box inline">
-  
-  
-
-
-  
-     
-    	<li><a href="/categories.html#programming-ref">
-    		programming <span>2</span>
-    	</a></li>
-     
-    	<li><a href="/categories.html#node-learning-ref">
-    		node-learning <span>2</span>
-    	</a></li>
-    
-  
+        <p>最近在写<strong>NBUT Virtual Judge</strong>的内核框架，用的又是Node.JS了，把它当作一个本地运行的脚本不断进行轮询。</p>
+<p>众所周知JS中的一个精髓就是<strong>异步回调</strong>。</p>
+<p>所以在我自己写的框架中也经常会出现类似于下面的代码：</p>
+<div class="highlight"><pre><code class="js"><span class="nx">foo</span><span class="p">.</span><span class="nx">bar</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</code></pre></div>
 
 
-</ul>
-
-
- 
-  <h2 id="programming-ref">programming</h2>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/programming/2013/08/08/iocp-learning-note">IOCP学习笔记（未完待续）</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/programming/2013/07/15/javascript-in-function-this-pointer-repoint">关于JavaScript中callback函数的this指针重定义</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
- 
-  <h2 id="node-learning-ref">node-learning</h2>
-  <ul>
-      
-    
-
-
-  
-    
-      
-      	
-      	<li><a href="/node-learning/2013/08/15/node-2-environment-in-windows">一起撸Node.JS（负贰）——环境</a></li>
-      	
-      
-    
-  
-    
-      
-      	
-      	<li><a href="/node-learning/2013/08/13/node-1-summary">一起撸Node.JS（负叁）——概述</a></li>
-      	
-      
-    
-  
-
-
-
-  </ul>
-
-
+<p>总而言之就是写一个函数，这个函数将会调用一个回调函数。</p>
+<p>那么如果我们想在<code>function</code>中也用<code>this</code>来指代这个<code>foo</code>对象该怎么办呢？</p>
 
     </article>
-</div>
 
-<div class="gridcol-1">
-    
+    <span class="fl">
+        <span class="date">15 July 2013</span><span class="tags">
+            
+            
+            
+            
+            <a href="/tags.html#Node.js-ref">Node.js</a>
+            
+            <a href="/tags.html#JavaScript-ref">JavaScript</a>
+            
+            
+            
+            
+        </span>
+    </span>
 
+    <span class="fr">
+        <a title="/programming/2013/07/15/javascript-in-function-this-pointer-repoint" href="/programming/2013/07/15/javascript-in-function-this-pointer-repoint">阅读全文</a>
+    </span>
 
-  <!-- Duoshuo Comment BEGIN -->
-<div class="ds-thread" data-thread-key="categories" data-title="分类"></div>
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"xadillax"};
-(function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = 'http://static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0]
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-})();
-</script>
-<!-- Duoshuo Comment END -->
-
-
-
-
+    <div class="cl"></div>
 </div>
 
 

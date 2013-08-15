@@ -4,7 +4,7 @@
  <title>艾克斯の編碼者</title>
  <link href="http://xadillax.github.io/" rel="self"/>
  <link href="http://xadillax.github.io"/>
- <updated>2013-08-13T01:58:47+08:00</updated>
+ <updated>2013-08-15T12:56:31+08:00</updated>
  <id>http://xadillax.github.io</id>
  <author>
    <name>XadillaX</name>
@@ -13,16 +13,238 @@
 
  
  <entry>
+   <title>一起撸Node.JS（负贰）——环境</title>
+   <link href="http://xadillax.github.io/node-learning/2013/08/15/node-2-environment-in-windows"/>
+   <updated>2013-08-15T00:00:00+08:00</updated>
+   <id>http://xadillax.github.io/node-learning/2013/08/15/node-2-environment-in-windows</id>
+   <content type="html">&lt;p&gt;　　由于&lt;a href=&quot;/node-learning/2013/08/15/node-2-environment-in-windows#linux-环境&quot;&gt;Linux&lt;/a&gt;中的环境搭建比较简单，所以草草略过。&lt;/p&gt;
+&lt;p&gt;　　其实&lt;a href=&quot;/node-learning/2013/08/15/node-2-environment-in-windows#windows-环境&quot;&gt;Windows&lt;/a&gt;下也不算麻烦，但是这里会讲一定量的别的环境的搭建。&lt;/p&gt;
+&lt;!-- 我是小小分割符 --&gt;
+&lt;h2 id=&quot;linux-环境&quot;&gt;&lt;a href=&quot;#linux-环境&quot;&gt;1. Linux 环境&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;讲到这个就很简单了，跟着下面的 &lt;strong&gt;bash&lt;/strong&gt; 操作即可：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/local/bin
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget http://nodejs.org/dist/v0.00.00/node-v0.00.00-linux-x00.tar.gz
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tar zxf node-v0.00.00-linux-x00.tar.gz
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;node-v0.00.00-linux-x00
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;其中将上方的 &lt;strong&gt;v0.00.00&lt;/strong&gt; 替换成 &lt;strong&gt;Node.js&lt;/strong&gt; 最新的版本号，把 &lt;strong&gt;x00&lt;/strong&gt; 替换成你自己电脑的位数。&lt;/p&gt;
+&lt;p&gt;也可以直接去官网 &lt;a href=&quot;http://nodejs.org/download/&quot;&gt;http://nodejs.org/download/&lt;/a&gt; 找到相应的地址。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;最后将其的连接加入到 &lt;code&gt;/usr/bin&lt;/code&gt; 下即可。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;bin
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ln node /usr/bin
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ln npm /usr/bin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;： 该用 &lt;code&gt;sudo&lt;/code&gt; 的地方就用 &lt;code&gt;sudo&lt;/code&gt; 或者 &lt;code&gt;su&lt;/code&gt; 。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;至此，&lt;strong&gt;Linux&lt;/strong&gt; 下的 &lt;strong&gt;Node.js&lt;/strong&gt; 环境基本搭建完毕。&lt;/p&gt;
+&lt;h2 id=&quot;windows-环境&quot;&gt;&lt;a href=&quot;#windows-环境&quot;&gt;2. Windows 环境&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id=&quot;cygwin-安装和配置&quot;&gt;&lt;a href=&quot;#cygwin-安装和配置&quot;&gt;2.1. Cygwin 安装和配置&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Cygwin&lt;/em&gt;&lt;/strong&gt; 是一个在 &lt;strong&gt;&lt;em&gt;Windows&lt;/em&gt;&lt;/strong&gt; 平台上运行的 &lt;strong&gt;&lt;em&gt;Unix&lt;/em&gt;&lt;/strong&gt; 模拟环境。对于学习 &lt;strong&gt;&lt;em&gt;Unix/Linux&lt;/em&gt;&lt;/strong&gt; 操作环境，或者从 &lt;strong&gt;&lt;em&gt;Unix&lt;/em&gt;&lt;/strong&gt; 到 &lt;strong&gt;&lt;em&gt;Windows&lt;/em&gt;&lt;/strong&gt; 的应用程序移植，或者进行某些特殊的开发工作，尤其是使用 &lt;strong&gt;&lt;em&gt;GNU工具集&lt;/em&gt;&lt;/strong&gt; 在 &lt;strong&gt;&lt;em&gt;Windows&lt;/em&gt;&lt;/strong&gt; 上进行嵌入式系统开发，非常有用。&lt;/p&gt;
+&lt;h4 id=&quot;cygwin-安装&quot;&gt;&lt;a href=&quot;#cygwin-安装&quot;&gt;2.1.1. Cygwin 安装&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;我们先跑到 &lt;strong&gt;Cygwin&lt;/strong&gt; 的官网上去把东西下来：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;http://cygwin.com/install.html&quot;&gt;http://cygwin.com/install.html&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意，最好下 &lt;strong&gt;x86&lt;/strong&gt; 的包，因为我们之后要讲一个 &lt;code&gt;cyg-apt&lt;/code&gt; 的脚本插件，这是一个能让 &lt;strong&gt;Cygwin&lt;/strong&gt; 能跟 &lt;strong&gt;Linux&lt;/strong&gt; 一样通过脚本从源安装软件包的脚本。为了方便修改，我们将其下成 &lt;strong&gt;x86&lt;/strong&gt; 的版本。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;然后就是安装步骤了。&lt;/p&gt;
+&lt;center&gt;
+&lt;img src=&quot;http://blog-xcoder-in.qiniudn.com/cygwin-install-1.png&quot; alt=&quot;从网络安装&quot; /&gt;
+&lt;/center&gt;
+&lt;center&gt;
+&lt;small&gt;[图2.1]&lt;/small&gt;
+&lt;/center&gt;
+
+&lt;p&gt;到 &lt;strong&gt;[图2.1]&lt;/strong&gt; 这个步骤的时候，选择默认的 &lt;code&gt;Install from Internet&lt;/code&gt; 即可。&lt;/p&gt;
+&lt;center&gt;
+&lt;img src=&quot;http://blog-xcoder-in.qiniudn.com/cygwin-install-2.png&quot; alt=&quot;选择安装路径&quot; /&gt;
+&lt;/center&gt;
+&lt;center&gt;
+&lt;small&gt;[图2.2]&lt;/small&gt;
+&lt;/center&gt;
+
+&lt;p&gt;在 &lt;strong&gt;[图2.2]&lt;/strong&gt; 的时候选一个安装路径。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：尽可能让这个安装路径简单，而不要是类似于&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;c:\Program Files\blahblah&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这样的文件路径。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;center&gt;
+&lt;img src=&quot;http://blog-xcoder-in.qiniudn.com/cygwin-install-3.png&quot; alt=&quot;本地包路径&quot; /&gt;
+&lt;/center&gt;
+&lt;center&gt;
+&lt;small&gt;[图2.3]&lt;/small&gt;
+&lt;/center&gt;
+
+&lt;p&gt;&lt;strong&gt;[图2.3]&lt;/strong&gt; 的时候选一个本地包的路径，我这里选的是 &lt;code&gt;e:\cygwin\tmp&lt;/code&gt;。&lt;/p&gt;
+&lt;center&gt;
+&lt;img src=&quot;http://blog-xcoder-in.qiniudn.com/cygwin-install-4.png&quot; alt=&quot;直连&quot; /&gt;
+&lt;/center&gt;
+&lt;center&gt;
+&lt;small&gt;[图2.4]&lt;/small&gt;
+&lt;/center&gt;
+
+&lt;p&gt;&lt;strong&gt;[图2.4]&lt;/strong&gt; 选择直接连接。&lt;/p&gt;
+&lt;center&gt;
+&lt;img src=&quot;http://blog-xcoder-in.qiniudn.com/cygwin-install-5.png&quot; alt=&quot;163&quot; /&gt;
+&lt;/center&gt;
+&lt;center&gt;
+&lt;small&gt;[图2.5]&lt;/small&gt;
+&lt;/center&gt;
+
+&lt;p&gt;我们国内的用户源还是选择 &lt;code&gt;163&lt;/code&gt; 的速度比较快。所以在 &lt;strong&gt;[图2.5]&lt;/strong&gt; 这一步的时候就直接选用默认的 &lt;code&gt;163&lt;/code&gt; 的源了。如果不是默认的话，请选中它。&lt;/p&gt;
+&lt;p&gt;在 &lt;strong&gt;Select Package&lt;/strong&gt; 也就是选择预安装的软件的时候，把下列表中的软件包勾选起来：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;wget&lt;/strong&gt;: 在 &lt;strong&gt;Utils&lt;/strong&gt; 中&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;vim&lt;/strong&gt;: 在 &lt;strong&gt;Editors&lt;/strong&gt; 中&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;gcc&lt;/strong&gt;: 在 &lt;strong&gt;Devel&lt;/strong&gt; 中&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;gcc-g++&lt;/strong&gt;: 在 &lt;strong&gt;Devel&lt;/strong&gt; 中&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;make&lt;/strong&gt;: 在 &lt;strong&gt;Devel&lt;/strong&gt; 中&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;cmake&lt;/strong&gt;: 在 &lt;strong&gt;Devel&lt;/strong&gt; 中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;若是这些选项已经被选起来了就不用再选了，如果没有选起来则把它选中。&lt;/p&gt;
+&lt;p&gt;勾选好了之后就可以下一步安装了，直至安装完毕，你就可以打开你的 &lt;strong&gt;Cygwin&lt;/strong&gt; 了。&lt;/p&gt;
+&lt;center&gt;
+&lt;img src=&quot;http://blog-xcoder-in.qiniudn.com/cygwin-install-6.png&quot; alt=&quot;Cygwin&quot; /&gt;
+&lt;/center&gt;
+&lt;center&gt;
+&lt;small&gt;[图2.6]&lt;/small&gt;
+&lt;/center&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;提示&lt;/strong&gt;：你可以点击窗口左上角的小图片，然后里面的 &lt;strong&gt;Options&lt;/strong&gt; 中，你可以调整你自己的 &lt;strong&gt;Cygwin&lt;/strong&gt; 外观。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;vim-配置&quot;&gt;&lt;a href=&quot;#vim-配置&quot;&gt;2.1.2. vim 配置&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;上一步我们已经选中了 &lt;strong&gt;vim&lt;/strong&gt; ，也就是说我们已经在 &lt;strong&gt;Cygwin&lt;/strong&gt; 中装上了 &lt;strong&gt;vim&lt;/strong&gt;。但是由于这里的 &lt;strong&gt;vim&lt;/strong&gt; 默认配置非常蛋疼，所以我们得改一下。&lt;/p&gt;
+&lt;p&gt;在你的 &lt;strong&gt;Cygwin&lt;/strong&gt; 中一句句输入下面的命令：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /home/&amp;lt;你自己的用户名&amp;gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget http://blog-xcoder-in.qiniudn.com/.vimrc
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkdir .vim
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; .vim
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkdir colors
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;colors
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget http://blog-xcoder-in.qiniudn.com/molokai.vim
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这样你的 &lt;strong&gt;vim&lt;/strong&gt; 就用上了上面的那个地址的配置文件，当然你也可以编辑你自己的配置文件或者说从网上下别的配置文件以满足你的个性化需求。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;vim&lt;/strong&gt; 配置以及使用请参照：&lt;a href=&quot;https://wiki.archlinux.org/index.php/Vim&quot;&gt;https://wiki.archlinux.org/index.php/Vim&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+事无巨细问 &lt;strong&gt;ArchWiki&lt;/strong&gt;。
+&lt;div style=&quot;text-align: right;&quot;&gt;
+&lt;em&gt;– &lt;a href=&quot;https://github.com/kalxd&quot;&gt;kalxd&lt;/a&gt;&lt;/em&gt;
+&lt;/div&gt;
+
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;apt-cyg&quot;&gt;&lt;a href=&quot;#apt-cyg&quot;&gt;2.1.3. apt-cyg&lt;/a&gt;&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;apt-cyg is a command-line installer for Cygwin which cooperates with Cygwin Setup and uses the same repository. The syntax is similar to apt-get.&lt;/p&gt;
+&lt;div style=&quot;text-align: right;&quot;&gt;
+&lt;em&gt;– From apt-cyg googlecode page&lt;/em&gt;
+&lt;/div&gt;
+
+&lt;/blockquote&gt;
+&lt;p&gt;总之意思就是说 &lt;code&gt;apt-cyg&lt;/code&gt; 是类似于 &lt;strong&gt;Linux&lt;/strong&gt; 中的 &lt;code&gt;apt-get&lt;/code&gt;， &lt;code&gt;yum&lt;/code&gt;, &lt;code&gt;zypper&lt;/code&gt; 等命令行软件包安装器一样，可以通过&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;apt-cyg install &amp;lt;package names&amp;gt;&lt;/code&gt; 来安装软件包&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;apt-cyg remove &amp;lt;package names&amp;gt;&lt;/code&gt; 来移除软件包&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;apt-cyg update&lt;/code&gt; 来更新 setup.ini&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;apt-cyg show&lt;/code&gt; 来列出已安装的软件包&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;apt-cyg find &amp;lt;pattern(s)&amp;gt;&lt;/code&gt; 来查找符合条件的软件包&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;apt-cyg describe &amp;lt;pattern(s)&amp;gt;&lt;/code&gt; 来描述符合条件的软件包&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;apt-cyg packageof &amp;lt;commands or files&amp;gt;&lt;/code&gt; 来定位其父软件包&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;apt-cyg-安装&quot;&gt;&lt;a href=&quot;#apt-cyg-安装&quot;&gt;2.1.3.1. apt-cyg 安装&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;其实也不能说是安装，纯粹是把脚本从网络上拷到自己的 &lt;strong&gt;Cygwin&lt;/strong&gt; 的环境目录中。&lt;/p&gt;
+&lt;p&gt;在你的 &lt;strong&gt;Cygwin&lt;/strong&gt; 中输入以下命令：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/local/bin
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget http://apt-cyg.googlecode.com/svn/trunk/apt-cyg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这样你就“安装”好了 &lt;strong&gt;apt-cyg&lt;/strong&gt; 了。不过这里用的是默认的源，所有东西都是默认的。&lt;/p&gt;
+&lt;p&gt;如果你现在已经心安理得或者不想折腾了可以跳过 &lt;strong&gt;&lt;a href=&quot;#apt-cyg-修改&quot;&gt;2.1.3.2. apt-cyg 修改&lt;/a&gt;&lt;/strong&gt;，如果你想把源换成 &lt;code&gt;163&lt;/code&gt; 的话那么稍微看一下吧。&lt;/p&gt;
+&lt;h4 id=&quot;apt-cyg-修改&quot;&gt;&lt;a href=&quot;#apt-cyg-修改&quot;&gt;2.1.3.2. apt-cyg 修改&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;接下去我们要对 &lt;strong&gt;apt-cyg&lt;/strong&gt; 做一些编辑。&lt;/p&gt;
+&lt;p&gt;你有下面两个选择：&lt;/p&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
+&lt;li&gt;如果你想学习 &lt;strong&gt;vim&lt;/strong&gt; 操作或者你已经熟悉了，那么直接使用 &lt;code&gt;vim apt-cyg&lt;/code&gt; 来进行编辑。&lt;/li&gt;
+&lt;li&gt;如果你是懒人还是想要直接编辑的话，请跑到你的 &lt;strong&gt;Cygwin&lt;/strong&gt; 的安装目录，找到 &lt;strong&gt;usr&lt;/strong&gt; 文件夹，飞进 &lt;strong&gt;local/bin&lt;/strong&gt; 目录中去，用你自己喜欢的文本编辑器打开并编辑。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;大约是 &lt;code&gt;68&lt;/code&gt; 行上下吧，有一句是：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;mirror&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ftp://mirror.mcs.anl.gov/pub/cygwin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;将其改成：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;mirror&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://mirrors.163.com/cygwin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;还有就是大概在 &lt;code&gt;98&lt;/code&gt; 行和 &lt;code&gt;105&lt;/code&gt; 行左右：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;    wget -N &lt;span class=&quot;nv&quot;&gt;$mirror&lt;/span&gt;/setup.bz2
+    ...
+    wget -N &lt;span class=&quot;nv&quot;&gt;$mirror&lt;/span&gt;/setup.ini
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;修改成：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;    wget -N &lt;span class=&quot;nv&quot;&gt;$mirror&lt;/span&gt;/x86/setup.bz2
+    ...
+    wget -N &lt;span class=&quot;nv&quot;&gt;$mirror&lt;/span&gt;/x86/setup.ini
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;至此，你的 &lt;strong&gt;Cygwin&lt;/strong&gt; 环境基本完成，以后可以再慢慢完善。&lt;/p&gt;
+&lt;h3 id=&quot;node.js-安装&quot;&gt;&lt;a href=&quot;#node.js-安装&quot;&gt;2.2. Node.js 安装&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;这个就很简单了，打开 &lt;strong&gt;&lt;a href=&quot;http://nodejs.org/download/&quot;&gt;Node.js&lt;/a&gt;&lt;/strong&gt; 官网下载安装即可。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;选择 &lt;strong&gt;Windows Installer (.msi)&lt;/strong&gt; 或者 &lt;strong&gt;Windows Binary (.exe)&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;安装好后就能直接在 &lt;strong&gt;Cygwin&lt;/strong&gt; 里面使用了。&lt;/p&gt;
+&lt;h2 id=&quot;真hello-world&quot;&gt;&lt;a href=&quot;#真hello-world&quot;&gt;3. 真·Hello World&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;现在，无论你是 &lt;strong&gt;Linux&lt;/strong&gt; 用户还是 &lt;strong&gt;Windows&lt;/strong&gt; 用户，都可以用一样的步骤来完成下面的 &lt;code&gt;Hello World&lt;/code&gt; 了。&lt;/p&gt;
+&lt;p&gt;随便跑一个目录里面新建一个文件并且用 &lt;strong&gt;vim&lt;/strong&gt; 编辑：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vim hello.js
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在里面输入下面的东西：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Hello world!&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然后退出 &lt;strong&gt;vim&lt;/strong&gt; 执行：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;node hello.js
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;终于，&lt;strong&gt;真·Hello world&lt;/strong&gt; 出现在了你的眼前，而不需要借助 &lt;strong&gt;&lt;a href=&quot;http://ideone.com/&quot;&gt;IDEOne&lt;/a&gt;&lt;/strong&gt; 了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;To be continued…&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>一起撸Node.JS（负叁）——概述</title>
-   <link href="http://xadillax.github.io/node-learning/2013/08/13/node-1-environment-in-windows"/>
+   <link href="http://xadillax.github.io/node-learning/2013/08/13/node-1-summary"/>
    <updated>2013-08-13T00:00:00+08:00</updated>
-   <id>http://xadillax.github.io/node-learning/2013/08/13/node-1-environment-in-windows</id>
+   <id>http://xadillax.github.io/node-learning/2013/08/13/node-1-summary</id>
    <content type="html">&lt;p&gt;　　本系列教程主要是写给我带的那帮熊孩子们看的。我自己的 &lt;strong&gt;Node.js&lt;/strong&gt; 水平半斤八两，措辞之中也免不了有自己错误的理解，会误人子弟。但是对于初学者来说，某些自己助记的理解还是可取的。有些概念性的错误可以等他们进一步深入研究之后再自行更正。&lt;/p&gt;
 &lt;p&gt;　　由于那帮人大多还处于使用 &lt;strong&gt;M$ Windows&lt;/strong&gt; 的令人不愉快的阶段，所以本教程将会退而求其次，使其在 &lt;strong&gt;Cygwin&lt;/strong&gt; 中模拟 &lt;strong&gt;linux&lt;/strong&gt; 的命令（Windows的bat脚本实在是让人不敢恭维）。以及在这里会讲述一些 &lt;strong&gt;Git&lt;/strong&gt; 操作的初步。当然，如果你已经在使用 &lt;strong&gt;linux&lt;/strong&gt; 进行开发的话，可以跳过前面一堆令人感到厌烦的环境配置章节。或者你在使用 &lt;strong&gt;M$ Windows&lt;/strong&gt; 但却不想改变自己的脚本习惯的话，也可以选择性地跳过一些章节和步骤。&lt;/p&gt;
 &lt;!-- 我是小小分割符 --&gt;
-&lt;h2 id=&quot;node.js是什么&quot;&gt;1. Node.JS是什么？&lt;/h2&gt;
+&lt;h2 id=&quot;node.js是什么&quot;&gt;&lt;a href=&quot;#node.js是什么&quot;&gt;1. Node.JS是什么？&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;很多人都知道JS是一门语言，而且是一门脚本语言，其全称就是 &lt;strong&gt;JavaScript&lt;/strong&gt;，而且与所谓的 &lt;strong&gt;Java&lt;/strong&gt; 没有一个屁的关系。&lt;/p&gt;
-&lt;h3 id=&quot;前端-javascript&quot;&gt;1.1 前端 JavaScript&lt;/h3&gt;
+&lt;h3 id=&quot;前端-javascript&quot;&gt;&lt;a href=&quot;#前端-javascript&quot;&gt;1.1 前端 JavaScript&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;在好多年前，&lt;strong&gt;JavaScript&lt;/strong&gt; 是网页的一个寄生虫，它必须依赖于网页的浏览器中才能执行，并且作为网页的一部分，以&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;//blahblah...&lt;/span&gt;
@@ -38,7 +260,7 @@
 &lt;p&gt;的形式将其包含进来。&lt;/p&gt;
 &lt;p&gt;但总而言之，&lt;strong&gt;JavaScript&lt;/strong&gt; 只是寄生在网页里面的一只小小可怜虫罢了。它的作用无非就是使网页的交互性更强，页面效果更多而已。&lt;/p&gt;
 &lt;p&gt;后来，这帮不甘寂寞的人类将 &lt;strong&gt;JavaScript&lt;/strong&gt; 从网页（或者说前端）的帝国中独立了出来（小心快递），于是就出现了 &lt;strong&gt;CommonJS&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id=&quot;commonjs&quot;&gt;1.2 CommonJS&lt;/h3&gt;
+&lt;h3 id=&quot;commonjs&quot;&gt;&lt;a href=&quot;#commonjs&quot;&gt;1.2 CommonJS&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;CommonJS&lt;/strong&gt; 其实不是一门新的语言，甚至都不能说它是一个新的解释器——实际上它只是一个概念或者是一个规范。&lt;/p&gt;
 &lt;p&gt;在这个规范中，它定义了很多 &lt;strong&gt;API&lt;/strong&gt; ，讲通俗点或者直截了当点就是函数啊类啊什么的，而这些 &lt;strong&gt;API&lt;/strong&gt; 是为那些普通应用程序（Native App）而非浏览器应用使用。它的终极目标就是提供一个类似于 &lt;strong&gt;Python&lt;/strong&gt;、&lt;strong&gt;Ruby&lt;/strong&gt; 之类的脚本一样的标准库，开发者可以用这样的东西一样来做到 &lt;strong&gt;Python&lt;/strong&gt;、&lt;strong&gt;Ruby&lt;/strong&gt; 能做到的事，而非仅仅局限于网页中的效果或者功能实现，它也可以跑在本地。&lt;/p&gt;
 &lt;p&gt;所以说下面的事情对于 &lt;strong&gt;JavaScript&lt;/strong&gt; 来说不再是梦：&lt;/p&gt;
@@ -50,7 +272,7 @@
 &lt;/ul&gt;
 &lt;p&gt;那么，它具体弥补了 &lt;strong&gt;前端JavaScript&lt;/strong&gt; 的哪些空白呢？其实这也涉及了很多 &lt;strong&gt;前端JavaScript&lt;/strong&gt; 所没有涉及的东西，如二进制、编码、IO、文件、系统、断言测试、套接字、事件队列、Worker、控制台等等。&lt;/p&gt;
 &lt;p&gt;关于 &lt;strong&gt;CommonJS&lt;/strong&gt; 的更进一步了解可以翻阅一下其 &lt;strong&gt;&lt;a href=&quot;http://wiki.commonjs.org/wiki/CommonJS&quot;&gt;Wiki&lt;/a&gt;&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id=&quot;node.js&quot;&gt;1.3 Node.JS&lt;/h3&gt;
+&lt;h3 id=&quot;node.js&quot;&gt;&lt;a href=&quot;#node.js&quot;&gt;1.3 Node.JS&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;上面讲了那么多，却始终停留在“规范”这个层面上。而 &lt;strong&gt;Node.JS&lt;/strong&gt; 的出现便是让 &lt;strong&gt;CommonJS&lt;/strong&gt; 成为了现实。&lt;/p&gt;
 &lt;p&gt;这里要大家明确的一点的就是 &lt;strong&gt;Node.JS&lt;/strong&gt; 并不是一门新的语言，它的语言还是 &lt;strong&gt;JavaScript&lt;/strong&gt; ，硬要说是一门新的语言那也应该是 &lt;strong&gt;Common JavaScript&lt;/strong&gt;。&lt;strong&gt;Node.JS&lt;/strong&gt; 只是 &lt;strong&gt;CommonJS&lt;/strong&gt; 的一个&lt;a href=&quot;http://zh.wikipedia.org/wiki/%E8%A7%A3%E9%87%8A%E5%99%A8&quot;&gt;解释器&lt;/a&gt;罢了。&lt;/p&gt;
 &lt;p&gt;它是基于 &lt;strong&gt;Google&lt;/strong&gt; 的 &lt;strong&gt;V8虚拟机&lt;/strong&gt;(Chrome浏览器所使用的JavaScript执行环境) 的一个解释器。&lt;/p&gt;
@@ -81,14 +303,14 @@
 &lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：语言要选择 &lt;strong&gt;JavaScript&lt;/strong&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;怎么样，同样能过题的对吧？&lt;/p&gt;
-&lt;h2 id=&quot;小结&quot;&gt;2. 小结&lt;/h2&gt;
+&lt;h2 id=&quot;小结&quot;&gt;&lt;a href=&quot;#小结&quot;&gt;2. 小结&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;上面对这些东西做了个简单的介绍，我需要你们知道的东西很简单：&lt;/p&gt;
-&lt;ol type=&quot;1&quot;&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
 &lt;li&gt;&lt;strong&gt;Node.JS&lt;/strong&gt; 是一个脚本解释器，用的语言是 &lt;strong&gt;JavaScript&lt;/strong&gt;。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Node.JS&lt;/strong&gt; 功能很强大，不是只能拿来做网站的，眼光放开阔些。&lt;/li&gt;
 &lt;li&gt;给我好好学。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&quot;番外&quot;&gt;3. 番外&lt;/h2&gt;
+&lt;h2 id=&quot;番外&quot;&gt;&lt;a href=&quot;#番外&quot;&gt;3. 番外&lt;/a&gt;&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;有个码畜老了，想学学书法来修身养性。当他展开宣纸，犹豫了半天之后，终于挥毫泼墨，在纸上龙飞凤舞写下几个大字：&lt;/p&gt;
 &lt;blockquote&gt;
@@ -116,11 +338,11 @@
 &lt;p&gt;　　本文主要是给那些暂时还无太多的Windows编程基础的人阅读，里面解释了一些相应的前驱知识。比如管道、重叠I/O模型等等。&lt;/p&gt;
 &lt;p&gt;　　如果你已经对这些了如指掌了，可以直接忽略本文——因为本文是给那些初学者看的。&lt;/p&gt;
 &lt;p&gt;　　不过即使是给初学者看的，很多概念只是提个大概，让读者心里有个印象而已。更进一步的详细知识还是需要读者自行翻阅相关资料。&lt;/p&gt;
-&lt;h2 id=&quot;前驱知识&quot;&gt;前驱知识&lt;/h2&gt;
-&lt;h3 id=&quot;管道&quot;&gt;管道&lt;/h3&gt;
+&lt;h2 id=&quot;前驱知识&quot;&gt;&lt;a href=&quot;#前驱知识&quot;&gt;前驱知识&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id=&quot;管道&quot;&gt;&lt;a href=&quot;#管道&quot;&gt;管道&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;　　&lt;strong&gt;管道（PIPE）&lt;/strong&gt;是用于进程间通信的一段共享内存。创建管道的进程称为&lt;strong&gt;管道服务器&lt;/strong&gt;，连接到一个管道的进程称为&lt;strong&gt;管道客户机&lt;/strong&gt;。一个进程在向管道写入数据之后，另一个进程就可以从管道的另一端将其读出来。&lt;/p&gt;
 &lt;p&gt;　　管道分两种，匿名管道和命名管道。&lt;/p&gt;
-&lt;h4 id=&quot;匿名管道&quot;&gt;匿名管道&lt;/h4&gt;
+&lt;h4 id=&quot;匿名管道&quot;&gt;&lt;a href=&quot;#匿名管道&quot;&gt;匿名管道&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;　　匿名管道是在父进程和子进程间单向传输数据的一种未命名管道，只能在本地计算机中使用，而不能用于网络间通信。&lt;/p&gt;
 &lt;p&gt;　　匿名管道由 &lt;code&gt;CreatePipe()&lt;/code&gt; 函数创建。该函数在创建匿名管道的同时返回两个句柄：读句柄和写句柄。其原型如下：&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;&lt;span class=&quot;n&quot;&gt;BOOL&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CreatePipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
@@ -136,7 +358,7 @@
 &lt;p&gt;其中 &lt;code&gt;hReadPipe&lt;/code&gt; 为指向读句柄的指针， &lt;code&gt;hWritePipe&lt;/code&gt; 为指向写句柄的指针； &lt;code&gt;lpPipeAttributes&lt;/code&gt; 为指向安全属性的指针；最后的 &lt;code&gt;nSize&lt;/code&gt; 为管道大小，若为 &lt;code&gt;0&lt;/code&gt; 则由系统来决定。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;　　匿名管道不支持异步读写操作。&lt;/p&gt;
-&lt;h4 id=&quot;命名管道&quot;&gt;命名管道&lt;/h4&gt;
+&lt;h4 id=&quot;命名管道&quot;&gt;&lt;a href=&quot;#命名管道&quot;&gt;命名管道&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;　　命名管道是在管道服务器和一台或多台管道客户机之间进行单向或者双向通信的一种命名的管道。一个命名管道的所有实例都共享同一个管道名，但是每一个实例都拥有独立的缓存和句柄，并且为 &lt;code&gt;客户机 - 服务器&lt;/code&gt; 通信提供一个分离的管道。&lt;/p&gt;
 &lt;p&gt;　　命名管道可以在同一台计算机的不同进程之间或者跨越一个网络的不同计算机的不同进程间进行有连接的可靠数据通信。如果连接中断，连接双方都能立即受到连接断开的信息。&lt;/p&gt;
 &lt;p&gt;　　每个命名管道都有一个唯一的名字，以区分存在于系统的命名对象列表中的其它命名管道。管道服务器在调用 &lt;code&gt;CreateNamedPipe()&lt;/code&gt; 函数创建管道的一个或多个实例时为其指定了名称。对于管道客户机，则是在调用 &lt;code&gt;CreateFile()&lt;/code&gt; 或 &lt;code&gt;CallNamedPipe()&lt;/code&gt; 函数在连接一个命名管道实例时对管道名进行指定。&lt;/p&gt;
@@ -163,8 +385,8 @@
 &lt;blockquote&gt;
 &lt;p&gt;这里的 &lt;code&gt;lpName&lt;/code&gt; 就是所谓的管道名称指针了， &lt;code&gt;dwOpenMode&lt;/code&gt; 为管道打开的模式（用来指示管道在创建好之后，它的传输方向、I/O控制以及安全模式）， &lt;code&gt;dwPipeMode&lt;/code&gt; 为管道模式， &lt;code&gt;nMaxInstance&lt;/code&gt; 正如之前所说的是最大的管道实例数， &lt;code&gt;nOutBufferSize&lt;/code&gt; 为输出缓存的大小， &lt;code&gt;nInBufferSize&lt;/code&gt; 为输入缓存的大小， &lt;code&gt;nDefaultTimeOut&lt;/code&gt; 为超时设置，最后的 &lt;code&gt;lpSecurityAttributes&lt;/code&gt; 为安全属性的指针。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&quot;createfile-readfile等api&quot;&gt;CreateFile, ReadFile等API&lt;/h3&gt;
-&lt;h4 id=&quot;createfile&quot;&gt;CreateFile()&lt;/h4&gt;
+&lt;h3 id=&quot;createfile-readfile等api&quot;&gt;&lt;a href=&quot;#createfile-readfile等api&quot;&gt;CreateFile, ReadFile等API&lt;/a&gt;&lt;/h3&gt;
+&lt;h4 id=&quot;createfile&quot;&gt;&lt;a href=&quot;#createfile&quot;&gt;CreateFile()&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;　　这个函数可以创建或者打开一个对象的句柄，凭借此句柄我们就可以控制这些对象：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;控制台对象&lt;/li&gt;
@@ -190,7 +412,7 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;参数解析&lt;/strong&gt;&lt;/p&gt;
-&lt;ol type=&quot;1&quot;&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;lpFileName：&lt;/em&gt;&lt;/strong&gt; 一个指向无终结符的字符串指针，用来指明要创建或者打开的对象的名字。&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;dwDesiredAccess：&lt;/em&gt;&lt;/strong&gt; 指明对象的控制模式。一个应用程序可以包含读控制、写控制、读/写控制、设备查询控制。&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;dwShareMode：&lt;/em&gt;&lt;/strong&gt; 指定对象的共享模式。如果 &lt;code&gt;dwShareMode == 0&lt;/code&gt; 则表示是互斥使用的。如果 &lt;code&gt;CreateFile&lt;/code&gt; 打开成功，则别的程序只能等到当前程序关闭对象句柄 &lt;code&gt;CloseHandle&lt;/code&gt; 后才能再打开或者使用。&lt;/p&gt;&lt;/li&gt;
@@ -204,7 +426,7 @@
 &lt;p&gt;如果调用之前文件已经存在，且 &lt;code&gt;dwCreationDisposition&lt;/code&gt; 参数为 &lt;code&gt;CREATE_ALWAYS&lt;/code&gt; 或者 &lt;code&gt;OPEN_AWAYS&lt;/code&gt; ，用 &lt;code&gt;GetLastError&lt;/code&gt; 返回 &lt;code&gt;ERROR_ALREADY_EXISTS&lt;/code&gt; （即使调用成功也会返回这个值）。如果调用之前不存在 &lt;code&gt;GetLastError&lt;/code&gt; 返回 &lt;code&gt;0&lt;/code&gt; 。&lt;/p&gt;
 &lt;p&gt;如果调用失败，返回值是 &lt;code&gt;INVALID_HANDLE_VALUE&lt;/code&gt; 。要进一步了解出错原因，调用 &lt;code&gt;GetLastError&lt;/code&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h4 id=&quot;closehandle&quot;&gt;CloseHandle()&lt;/h4&gt;
+&lt;h4 id=&quot;closehandle&quot;&gt;&lt;a href=&quot;#closehandle&quot;&gt;CloseHandle()&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;　　用于关掉一个打开的对象句柄。&lt;/p&gt;
 &lt;p&gt;　　函数原型如下：&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;&lt;span class=&quot;n&quot;&gt;BOOL&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CloseHandle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
@@ -213,7 +435,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;h4 id=&quot;readfile&quot;&gt;ReadFile()&lt;/h4&gt;
+&lt;h4 id=&quot;readfile&quot;&gt;&lt;a href=&quot;#readfile&quot;&gt;ReadFile()&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;　　&lt;code&gt;ReadFile()&lt;/code&gt; 函数从文件指针指定的位置读取数据。读操作完毕之后，文件指针将根据实际读出的数据自动进行调整，除非文件句柄是以 &lt;code&gt;OVERLAPPED&lt;/code&gt; 属性值打开的。如果是以 &lt;code&gt;OVERLAPPED&lt;/code&gt; 打开的I/O，应用程序就需要自己手动调整文件指针。&lt;/p&gt;
 &lt;p&gt;　　这个函数被设计成兼有同步和异步操作。 &lt;code&gt;ReadFileEx()&lt;/code&gt; 函数则设计成只支持异步操作，异步操作允许应用程序在读文件期间可以同时进行其它的操作。&lt;/p&gt;
 &lt;p&gt;　　函数原型：&lt;/p&gt;
@@ -229,7 +451,7 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;参数解析&lt;/strong&gt;&lt;/p&gt;
-&lt;ol type=&quot;1&quot;&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;hFile：&lt;/em&gt;&lt;/strong&gt; 文件句柄（必须具有 &lt;code&gt;GENERIC_READ&lt;/code&gt; 访问权限）。&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;lpBuffer：&lt;/em&gt;&lt;/strong&gt; 用来接收从文件中读出的数据的缓冲区。&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;nNumberOfBytesToRead：&lt;/em&gt;&lt;/strong&gt; 指明要读取的字节总数。&lt;/p&gt;&lt;/li&gt;
@@ -238,7 +460,7 @@
 &lt;/ol&gt;
 &lt;p&gt;&lt;strong&gt;返回值&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;有如下任一种情况发生都会导致函数返回：&lt;/p&gt;
-&lt;ol type=&quot;1&quot;&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
 &lt;li&gt;在管道另一端的写操作完成后。&lt;/li&gt;
 &lt;li&gt;请求的字节数传输完毕。&lt;/li&gt;
 &lt;li&gt;发生错误。&lt;/li&gt;
@@ -246,7 +468,7 @@
 &lt;p&gt;如果函数正确，返回非零。&lt;/p&gt;
 &lt;p&gt;如果返回值是非零但接受的字节数为 &lt;code&gt;0&lt;/code&gt; ，那么可能是文件指针在读操作期间超出了文件的 &lt;code&gt;end&lt;/code&gt; 位置。然而如果文件以 &lt;code&gt;FILE_FLAG_OVERLAPPED&lt;/code&gt; 方式打开， &lt;code&gt;lpOverlapped&lt;/code&gt; 参数不为 &lt;code&gt;NULL&lt;/code&gt; ，文件指针在读操作期间超出了文件的 &lt;code&gt;end&lt;/code&gt; 位置，那么返回值肯定是 &lt;code&gt;FALSE&lt;/code&gt; ， &lt;code&gt;GetLastError&lt;/code&gt; 返回的错误是 &lt;code&gt;ERROR_HANDLE_EOF&lt;/code&gt; 。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h4 id=&quot;writefile&quot;&gt;WriteFile&lt;/h4&gt;
+&lt;h4 id=&quot;writefile&quot;&gt;&lt;a href=&quot;#writefile&quot;&gt;WriteFile&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;　　可以以同步或异步方式向一个对象句柄中写数据。&lt;/p&gt;
 &lt;p&gt;　　函数原型：&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;&lt;span class=&quot;n&quot;&gt;BOOL&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;WriteFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
@@ -260,8 +482,8 @@
 
 
 &lt;p&gt;　　其它信息与 &lt;code&gt;ReadFile&lt;/code&gt; 极其相似，可以参考 &lt;code&gt;ReadFile&lt;/code&gt; 。&lt;/p&gt;
-&lt;h3 id=&quot;winsock重叠io模型&quot;&gt;Winsock重叠I/O模型&lt;/h3&gt;
-&lt;h4 id=&quot;重叠io模型的概念&quot;&gt;重叠I/O模型的概念&lt;/h4&gt;
+&lt;h3 id=&quot;winsock重叠io模型&quot;&gt;&lt;a href=&quot;#winsock重叠io模型&quot;&gt;Winsock重叠I/O模型&lt;/a&gt;&lt;/h3&gt;
+&lt;h4 id=&quot;重叠io模型的概念&quot;&gt;&lt;a href=&quot;#重叠io模型的概念&quot;&gt;重叠I/O模型的概念&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;　　当调用 &lt;code&gt;ReadFile()&lt;/code&gt; 和 &lt;code&gt;WriteFile()&lt;/code&gt; 时，如果最后一个参数 &lt;code&gt;lpOverlapped&lt;/code&gt; 设置为 &lt;code&gt;NULL&lt;/code&gt; ，那么线程就阻塞在这里，知道读写完指定的数据后，它们才会返回。这样在读写大文件的时候，很多时间都浪费在等待 &lt;code&gt;ReadFile()&lt;/code&gt; 和 &lt;code&gt;WriteFile()&lt;/code&gt; 的返回上面。如果 &lt;code&gt;ReadFile()&lt;/code&gt; 和 &lt;code&gt;WriteFile()&lt;/code&gt; 是往管道里面读写数据，那么有可能阻塞更久，导致程序性能下降。&lt;/p&gt;
 &lt;p&gt;　　为了解决这个问题，Windows引进了&lt;strong&gt;重叠I/O&lt;/strong&gt;的概念，它能够同时以多个线程处理多个I/O。其实你自己开多个线程也可以处理多个I/O，但是系统内部对I/O的处理在性能上有很大的优化。它是Windows下实现异步I/O的最常用的方式。&lt;/p&gt;
 &lt;p&gt;　　Windows为几乎全部类型的文件提供这个工具：磁盘文件、通信端口、命名管道和套接字。通常，使用 &lt;code&gt;ReadFile()&lt;/code&gt; 和 &lt;code&gt;WriteFile()&lt;/code&gt; 就可以很好地执行重叠I/O。&lt;/p&gt;
@@ -300,7 +522,7 @@
 
 
 &lt;p&gt;　　创建套接字的时候，加入使用的是 &lt;code&gt;Socket()&lt;/code&gt; 函数而非 &lt;code&gt;WSASocket()&lt;/code&gt; 函数，那么会默认设置 &lt;code&gt;WSA_FLAG_OVERLAPPED&lt;/code&gt; 标志。成功创建好了一个套接字，将其与本地接口绑定到一起以后，便可以开始进行这个套接字上的重叠I/O操作，方法是调用下述的Winsock 2函数，同时为他们制定一个 &lt;code&gt;WSAOVERLAPPED&lt;/code&gt; 结构参数（&lt;code&gt;#define WSAOVERLAPPED OVERLAPPED // WINSOCK2.H&lt;/code&gt;）：&lt;/p&gt;
-&lt;ol type=&quot;1&quot;&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
 &lt;li&gt;&lt;code&gt;WSASend()&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;WSASendTo()&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;WSARecv()&lt;/code&gt;&lt;/li&gt;
@@ -329,7 +551,7 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;参数解析&lt;/strong&gt;&lt;/p&gt;
-&lt;ol type=&quot;1&quot;&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;sListenSocket：&lt;/em&gt;&lt;/strong&gt; 指定的是一个监听套接字。&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;sAcceptSocket：&lt;/em&gt;&lt;/strong&gt; 指定的是另一个套接字，负责对进入连接请求的“接受”。 &lt;code&gt;AcceptEx()&lt;/code&gt; 函数和 &lt;code&gt;accept()&lt;/code&gt; 函数的区别在于，我们必须提供接受的套接字，而不是让函数自动为我们创建。正是由于要提供套接字，所以要求我们事先调用 &lt;code&gt;socket()&lt;/code&gt; 或者 &lt;code&gt;WSASocket()&lt;/code&gt; 函数创建一个套接字，以便通过 &lt;code&gt;sAcceptSocket&lt;/code&gt; 参数，将其传递给 &lt;code&gt;AcceptEx()&lt;/code&gt; 。&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;lpOutputBuffer：&lt;/em&gt;&lt;/strong&gt; 指定的是一个特殊的缓冲区，因为它要负责三种数据的接收：服务器的本地地址，客户机的远程地址，以及在新建连接上接收的第一个数据块。存储顺序是： &amp;gt; 接收到的数据块→本地地址→远程地址&lt;/p&gt;&lt;/li&gt;
@@ -339,7 +561,7 @@
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;lpOverlapped：&lt;/em&gt;&lt;/strong&gt; 它对应的是一个 &lt;code&gt;OVERLAPPED&lt;/code&gt; 结构，允许 &lt;code&gt;AcceptEx()&lt;/code&gt; 以一种异步方式工作。如我们早先所述，只有在一个重叠I/O应用中，该函数才需要使用事件对象通知机制（&lt;code&gt;hEvent&lt;/code&gt; 字段），这是由于此时没有一个完成例程参数可供使用。&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-&lt;h4 id=&quot;获取重叠io操作完成结果&quot;&gt;获取重叠I/O操作完成结果&lt;/h4&gt;
+&lt;h4 id=&quot;获取重叠io操作完成结果&quot;&gt;&lt;a href=&quot;#获取重叠io操作完成结果&quot;&gt;获取重叠I/O操作完成结果&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;　　当异步I/O请求挂起之后，最终要知道I/O操作是否完成。一个重叠I/O请求最终完成后，应用程序要负责读取重叠I/O操作的结果。对于读，直到I/O完成，接收缓冲器才有效；对于写，要知道是否成功，有几种方法可以做到这点，最直接的方法是调用 &lt;code&gt;(WSA)GetOverlappedResult&lt;/code&gt; ，其函数原型如下：&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;&lt;span class=&quot;n&quot;&gt;WINBASEAPI&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BOOL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WINAPI&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;GetOverlappedResult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;HANDLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
@@ -360,7 +582,7 @@
 
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;参数解析&lt;/strong&gt;&lt;/p&gt;
-&lt;ol type=&quot;1&quot;&gt;
+&lt;ol style=&quot;list-style-type: decimal&quot;&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;参数一：&lt;/em&gt;&lt;/strong&gt; 文件/套接字句柄。&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;参数二：&lt;/em&gt;&lt;/strong&gt; 参数一关联的 &lt;code&gt;(WSA)OVERLAPPED&lt;/code&gt; 结构，在调用 &lt;code&gt;CreateFile()&lt;/code&gt; 、 &lt;code&gt;WSASocket()&lt;/code&gt; 或者 &lt;code&gt;AcceptEx()&lt;/code&gt; 时指定。&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;strong&gt;&lt;em&gt;参数三：&lt;/em&gt;&lt;/strong&gt; 指向字节计数指针，负责接收一次重叠发送或者接收操作实际传输的字节数。&lt;/p&gt;&lt;/li&gt;
