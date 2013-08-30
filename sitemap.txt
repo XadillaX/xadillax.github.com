@@ -1,14 +1,16 @@
 
-http://xadillax.github.io/archive.html
-http://xadillax.github.io/atom.xml
-http://xadillax.github.io/categories.html
-http://xadillax.github.io/curriculumvitae.html
 http://xadillax.github.io/index.html
-http://xadillax.github.io/pages.html
+http://xadillax.github.io/curriculumvitae.html
+http://xadillax.github.io/about.html
+http://xadillax.github.io/atom.xml
 http://xadillax.github.io/rss.xml
+http://xadillax.github.io/archive.html
 http://xadillax.github.io/sitemap.txt
+http://xadillax.github.io/categories.html
+http://xadillax.github.io/pages.html
 http://xadillax.github.io/tags.html
 
+http://xadillax.github.io/programming/2013/08/31/srm-589-div2
 http://xadillax.github.io/node-learning/2013/08/16/node-3-base
 http://xadillax.github.io/node-learning/2013/08/15/node-2-environment-in-windows
 http://xadillax.github.io/node-learning/2013/08/13/node-1-summary

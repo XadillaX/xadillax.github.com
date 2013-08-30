@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <title>TopCoder SRM 589 DIV 2 :: 艾克斯の編碼者</title>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    
+    <meta name="author" content="XadillaX">
+
+    <!-- Enable responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript" src="/assets/themes/graydiary/js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="/assets/themes/graydiary/js/main.js"></script>
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href='http://fonts.googleapis.com/css?family=Macondo' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+    <link href="/assets/themes/graydiary/css/main.css" rel="stylesheet">
+    <link href="/assets/themes/graydiary/css/syntax.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div id="back-to-top">
+        <span>▲</span>
+        <p>Top</p>
+    </div>
+
+    <div id="wrapper">
+        <div id="sidebar" class="fl">
+            <a href="http://xadillax.github.io">
+                <img class="avatar" src="https://secure.gravatar.com/avatar/564d6bd6e577a0e1859a58a0aaf82c5f?s=64" alt="艾克斯の編碼者" />
+            </a>
+            <p class="italic">艾克斯の編碼者</p>
+            <p></p>
+
+            <ul id="primary-nav">
+                <li><span class="home"></span><a href="http://xadillax.github.io">首页</a></li>
+                <li><span class="portfolio"></span><a href="http://xadillax.github.io/archive.html">存档</a></li>
+                <li><span class="contact"></span><a href="http://xadillax.github.io/categories.html">分类</a></li>
+                <li><span class="about"></span><a href="http://xadillax.github.io/curriculumvitae.html">关于</a></li>
+                <li><span class="mail"></span><a href="http://xadillax.github.io/rss.xml">订阅</a></li>
+            </ul>
+        </div>
+
+        <div id="container" class="fr">
+            <div id="main" class="fl">
+                <div class="mini-wrapper">
+                    
+<div class="gridcol-1">
+    <h1 class="pattern">
+        <span>
+            TopCoder SRM 589 DIV 2
+        </span>
+    </h1>
+
+    <span class="fl">
+        <span class="date">31 August 2013</span>
+        <span class="tags">
+            
+            
+            
+            
+            <a href="/tags.html#TopCoder-ref">TopCoder</a>
+            
+            <a href="/tags.html#SRM-ref">SRM</a>
+            
+            
+            
+            
+        </span>
+    </span>
+
+    <div class="cl"></div>
+
+    <article class="rich-content">
+        <p>　　好久没撸 <strong>TC</strong> 了，手都生了。前两天刚折腾好 <strong>LinuxMint</strong> + <strong>Cinnamon</strong>，顺便手贱把 <strong>TC</strong> 环境配好了。</p>
+<p>　　随便进去扯了一套最新的 <strong>SRM</strong> 来搞，全跑完之后才发现原来这场比赛还处于 <strong>System Running</strong> 阶段。于是知道了比赛一结束还在 <strong>Running</strong> 的时候你就已经可以自己拉出来做了。小绿名大家不要笑。</p>
+<!-- 我是小小分割符 -->
+
+<h2 id="summary"><a href="#summary">Summary</a></h2>
+<p>　　这次 <strong>DIV 2</strong> 的难度一般，一道签到题加两道普通的 <strong>DP</strong>。</p>
+<p>　　<a href="https://github.com/XadillaX/xadillax-topcoder/tree/master/code/SRM589-DIV2">Code on GitHub</a>.</p>
+<h2 id="pt---goose-tattarrattat"><a href="#pt---goose-tattarrattat">250pt - Goose Tattarrattat</a></h2>
+<p>题意很简单，就是给你一个字符串，问你最少改变多少字符让字符串所有字符都一样。</p>
+<p>签到题，找最多的字符跟总长度一减就OK了。</p>
+<div class="highlight"><pre><code class="cpp"><span class="cp">#define SIZE(x) ((int)(x.size()))</span>
+<span class="cp">#define LENGTH(x) ((int)(x.length()))</span>
+<span class="k">class</span> <span class="nc">GooseTattarrattatDiv2</span> 
+<span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">getmin</span><span class="p">(</span><span class="n">string</span> <span class="n">S</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="n">GooseTattarrattatDiv2</span><span class="o">::</span><span class="n">getmin</span><span class="p">(</span><span class="n">string</span> <span class="n">S</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">maxsame</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">map</span><span class="o">&lt;</span><span class="kt">char</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">mp</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">LENGTH</span><span class="p">(</span><span class="n">S</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">mp</span><span class="p">[</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">maxsame</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">maxsame</span><span class="p">,</span> <span class="n">mp</span><span class="p">[</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]]);</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">LENGTH</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">-</span> <span class="n">maxsame</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h2 id="pt---gears"><a href="#pt---gears">500pt - Gears</a></h2>
+<p>有 <strong><em>N</em></strong> 个齿轮围成一圈，相邻两个齿轮要反方向转才能正常运转不卡到其它轮子。你要从中间拿掉几个齿轮（留空了就不影响其左边的左边的齿轮），问最少拿掉几个使得所有齿轮能正常转。</p>
+<p>我们建两个二维 <strong><em>dp</em></strong> 数组，或者一个三维 <strong><em>dp</em></strong> 数组：</p>
+<div class="highlight"><pre><code class="cpp"><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="o">|</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="o">|</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>第一维 <code>i</code> 代表当前是第 <code>i</code> 个齿轮。第二维若是 <code>0</code> 则表示这个齿轮拿走，若是 <code>1</code> 代表留下。第三维若是 <code>0</code> 则代表第一个齿轮拿走，<code>1</code> 代表第一个齿轮留下。整个数组的每个元素就代表该齿轮留下或者拿走且第一个齿轮是留下或者拿走的情况下的最少拿走齿轮数。</p>
+<p>所以我们能得到几个状态转移方程：</p>
+<blockquote>
+<h3><a href="#第一个齿轮">第一个齿轮</a></h3>
+</blockquote>
+<div class="highlight"><pre><code class="cpp"><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+<span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+</code></pre></div>
+
+
+<blockquote>
+<h3><a href="#第二个齿轮">第二个齿轮</a></h3>
+<p>如果与第一个同向那么就有了一留一走或者两个都走的情况。否则就是四种情况都可以。</p>
+</blockquote>
+<div class="highlight"><pre><code class="cpp"><span class="k">if</span><span class="p">(</span><span class="err">与第一个齿轮同向</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span> 
+<span class="p">{</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<blockquote>
+<h3><a href="#之后的所有齿轮">之后的所有齿轮</a></h3>
+<p>若该齿轮与前一个齿轮方向相同 ，那么该齿轮留下的时候，前一个齿轮必须得走，那么就是 <code>dp[i - 1][0][?]</code>;该齿轮走的时候，前一个齿轮可走可留，就是 <code>dp[i - 1][0|1][?] + 1</code> 的稍微小一点那个。</p>
+<p>若方向不相同 ，那么就是该齿轮留下的时候，前一个齿轮也可以留下。</p>
+</blockquote>
+<div class="highlight"><pre><code class="cpp"><span class="k">if</span><span class="p">(</span><span class="err">与前一个齿轮同向</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+
+    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">else</span> 
+<span class="p">{</span>
+    <span class="n">dp</span> <span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="n">dp</span> <span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+
+    <span class="n">dp</span> <span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">dp</span> <span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>最后若最后一个齿轮与第一个齿轮同向，那么在 <code>dp[i - 1][0][0]</code>、<code>dp[i - 1][0][1]</code>、<code>dp[i - 1][1][0]</code> 中挑一个。若不同向，那么多了个 <code>dp[i - 1][1][1]</code> 这个选择。</p>
+<p>下面就是代码了：</p>
+<div class="highlight"><pre><code class="cpp"><span class="k">class</span> <span class="nc">GearsDiv2</span> 
+<span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">getmin</span><span class="p">(</span><span class="n">string</span> <span class="n">Directions</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="n">GearsDiv2</span><span class="o">::</span><span class="n">getmin</span><span class="p">(</span><span class="n">string</span> <span class="n">Directions</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="mi">100</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">LENGTH</span><span class="p">(</span><span class="n">Directions</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10000000</span><span class="p">;</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10000000</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">Directions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">Directions</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="p">{</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10000000</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">Directions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">Directions</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="p">{</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+            
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]);</span>
+            
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="kt">int</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">mi</span> <span class="o">=</span> <span class="n">LENGTH</span><span class="p">(</span><span class="n">Directions</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">Directions</span><span class="p">[</span><span class="n">mi</span><span class="p">]</span> <span class="o">==</span> <span class="n">Directions</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="p">{</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">mi</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">mi</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">mi</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]));</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">mi</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">mi</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span> <span class="n">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">mi</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">mi</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]));</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<h2 id="pt---flipping-bits"><a href="#pt---flipping-bits">1000pt - Flipping Bits</a></h2>
+<p>给你一个 <strong>01串</strong> 与一个正整数 <em><strong>M</strong></em>。<strong>01串</strong> 有如下三种操作:</p>
+<ul>
+<li>随便反转一位（0 -&gt; 1, 1 -&gt; 0）。</li>
+<li>将开头 <code>k * M</code> 位反转。k 可以是任何正整数。</li>
+<li>将末尾 <code>k * M</code> 位反转。k 可以是任何正整数。</li>
+</ul>
+<p>问最少需要几步将整个字符串变成都是 <code>1</code>。</p>
+<p>这又是一个 <strong>DP</strong> 的题目。</p>
+<p>我们先设有 <strong><em>G</em></strong> 组，一组 <strong><em>M</em></strong> 个 <code>01字符</code>。那么就能有</p>
+<div class="highlight"><pre><code class="cpp"><span class="n">dp1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="o">|</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">dp2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="o">|</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+
+
+<p>其中 <code>i</code> 代表第 <code>i</code> 组，第二维如果是 <code>0</code> 就代表这一组采用一位位反转的操作将这组全变成 <code>1</code>，如果是 <code>1</code> 则将整组全部反转再采用一位位反转的操作将这组全变成 <code>1</code> 。至于 <code>dp1</code> 和 <code>dp2</code> 则代表从头到尾和从尾到头。</p>
+<p>由于只有 <code>0</code> 和 <code>1</code> 反转，那么一组反转两次就能还原原状——这是一个非常重要的性质。</p>
+<p>如果某一组采用<strong>整组反转</strong>的操作，若前一组也是<strong>整组反转</strong>，那么就相当于操作次数不变，只是将前一组的反转范围延续到这一组；若前一组是<strong>非整组反转</strong>，那么就相当于从头到这一组反转之后，前面的所有组再反转回去——相当于是多了两次操作。于是就有了（先只拿 <code>dp1</code> 作为例子）：</p>
+<div class="highlight"><pre><code class="cpp"><span class="n">dp1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="err">这一组</span><span class="mi">1</span><span class="err">的数量</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="err">这一组</span><span class="mi">1</span><span class="err">的数量</span> 
+<span class="p">);</span>
+</code></pre></div>
+
+
+<p>如果某一组采用<strong>非整组反转</strong>，那么操作次数就是前一组的<strong>整组反转</strong>或者<strong>非整组反转</strong>的操作次数加上这一组 <code>0</code> 的数量：</p>
+<div class="highlight"><pre><code class="cpp"><span class="n">dp1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="err">这一组</span><span class="mi">0</span><span class="err">的数量</span><span class="p">,</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="err">这一组</span><span class="mi">0</span><span class="err">的数量</span>
+<span class="p">);</span>
+</code></pre></div>
+
+
+<p>用上面的转移方程把正反向都求了一遍之后，我们就可以求总答案了，总答案就是我们枚举中间只有<strong>操作1</strong>的段的首尾，加上该中间段前部分的 <strong><em>dp</em></strong> 答案和其后部分的 <strong><em>dp</em></strong> 答案，取出最小值就是了。</p>
+<div class="highlight"><pre><code class="cpp"><span class="k">class</span> <span class="nc">FlippingBitsDiv2</span> 
+<span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">getmin</span><span class="p">(</span><span class="n">vector</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">S</span><span class="p">,</span> <span class="kt">int</span> <span class="n">M</span><span class="p">);</span>
+    
+    <span class="n">string</span> <span class="n">str</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">group</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">tn1</span><span class="p">[</span><span class="mi">2600</span><span class="p">],</span> <span class="n">tnsum1</span><span class="p">[</span><span class="mi">2600</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">tn2</span><span class="p">[</span><span class="mi">2600</span><span class="p">],</span> <span class="n">tnsum2</span><span class="p">[</span><span class="mi">2600</span><span class="p">];</span>
+    
+    <span class="kt">int</span> <span class="n">dp1</span><span class="p">[</span><span class="mi">2600</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">dp2</span><span class="p">[</span><span class="mi">2600</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+    
+    <span class="kt">int</span> <span class="nf">calcsum</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">l</span> <span class="o">&gt;</span> <span class="n">r</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">tot</span> <span class="o">=</span> <span class="n">tnsum1</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">-</span> <span class="n">tnsum1</span><span class="p">[</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+        <span class="k">return</span> <span class="n">tot</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="n">FlippingBitsDiv2</span><span class="o">::</span><span class="n">getmin</span><span class="p">(</span><span class="n">vector</span> <span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">S</span><span class="p">,</span> <span class="kt">int</span> <span class="n">M</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">str</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SIZE</span><span class="p">(</span><span class="n">S</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">str</span> <span class="o">+=</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">LENGTH</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="o">/</span> <span class="n">M</span><span class="p">;</span>
+    <span class="n">ZERO</span><span class="p">(</span><span class="n">tn1</span><span class="p">);</span>
+    <span class="n">ZERO</span><span class="p">(</span><span class="n">tn2</span><span class="p">);</span>
+    
+    <span class="c1">// init.</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">group</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">op</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">M</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">ed</span> <span class="o">=</span> <span class="n">op</span> <span class="o">+</span> <span class="n">M</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">op</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">ed</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="n">tn1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">++</span><span class="p">,</span> <span class="n">tn2</span><span class="p">[</span><span class="n">group</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="n">dp1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">;</span>
+        <span class="n">dp1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">;</span>
+        <span class="n">dp2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">;</span>
+        <span class="n">dp2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// tnsum</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">group</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">tnsum1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">tn1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tnsum2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">tn2</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">tnsum1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tnsum1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">tn1</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">tnsum2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tnsum2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">tn2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// dp.</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">group</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">dp1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// head -&gt; tail</span>
+            <span class="n">dp1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">tn1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+            <span class="n">dp1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="n">tn1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]);</span>
+            
+            <span class="c1">// tail -&gt; head</span>
+            <span class="n">dp2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">tn2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+            <span class="n">dp2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="n">tn2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="c1">// head -&gt; tail</span>
+            <span class="n">dp1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span>
+                <span class="n">dp1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">tn1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">dp1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">tn1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="p">);</span>
+            <span class="n">dp1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span>
+                <span class="n">dp1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="n">tn1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]),</span>
+                <span class="n">dp1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="n">tn1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="p">);</span>
+            
+            <span class="c1">// tail -&gt; head</span>
+            <span class="n">dp2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span>
+                <span class="n">dp2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">tn2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">dp2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">tn2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="p">);</span>
+            <span class="n">dp2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span>
+                <span class="n">dp2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="n">tn2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]),</span>
+                <span class="n">dp2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">M</span> <span class="o">-</span> <span class="n">tn2</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="kt">int</span> <span class="n">minans</span> <span class="o">=</span> <span class="mi">100000000</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">group</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">group</span> <span class="o">-</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">zzl</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">zzr</span> <span class="o">=</span> <span class="n">group</span> <span class="o">-</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            
+            <span class="n">minans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">minans</span><span class="p">,</span>
+                <span class="n">min</span><span class="p">(</span><span class="n">dp1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dp1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span>
+                <span class="n">min</span><span class="p">(</span><span class="n">dp2</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">dp2</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span>
+                <span class="n">calcsum</span><span class="p">(</span><span class="n">zzl</span><span class="p">,</span> <span class="n">zzr</span><span class="p">)</span>
+                <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">minans</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+
+
+    </article>
+</div>
+
+<div class="gridcol-1">
+    
+    <span class="fl"><a class="pagination" href="/node-learning/2013/08/16/node-3-base" title="一起撸Node.JS（壹）——基本语法和类型">上一篇</a></span>
+    
+
+    
+
+    <div class="cl"></div>
+</div>
+
+<div class="gridcol-1">
+    
+
+
+  <!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread" data-thread-key="/programming/2013/08/31/srm-589-div2" data-title="TopCoder SRM 589 DIV 2"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"xadillax"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+<!-- Duoshuo Comment END -->
+
+
+
+
+</div>
+
+
+                </div>
+            </div>
+
+            <div id="footer" class="fl">
+                <div class="mini-wrapper">
+                    <div class="gridcol-1-2">
+                        <h5 class="pattern"><span>关注我</span></h5>
+                        <ul>
+                            <li><a href="http://xadillax.github.io/rss.xml">RSS</a></li>
+                            <li><a href="https://github.com/XadillaX">GitHub</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="gridcol-1-2">
+                        <h5 class="pattern"><span>版权</span></h5>
+                        <p>© 2013 艾克斯の編碼者.</p>
+                        <p>Powered by <a href="http://jekyllrb.com">Jekyll</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cl"></div>
+        </div>
+
+        <div class="cl"></div>
+    </div>
+</body>
+</html>
