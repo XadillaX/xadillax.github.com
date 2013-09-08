@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-    <title>存档 :: 艾克斯の編碼者</title>
+    <title>关于JavaScript中callback函数的this指针重定义 :: 艾克斯の編碼者</title>
     <meta http-equiv=Content-Type content="text/html;charset=utf-8">
     
     <meta name="author" content="XadillaX">
@@ -53,135 +53,54 @@
 <div class="gridcol-1">
     <h1 class="pattern">
         <span>
-            存档
+            关于JavaScript中callback函数的this指针重定义
         </span>
     </h1>
 
+    <span class="fl">
+        <span class="date">15 July 2013</span>
+        <span class="tags">
+            
+            
+            
+            
+            <a href="/tags.html#Node.js-ref">Node.js</a>
+            
+            <a href="/tags.html#JavaScript-ref">JavaScript</a>
+            
+            
+            
+            
+        </span>
+    </span>
+
+    <div class="cl"></div>
+
     <article class="rich-content">
-        
+        <p>最近在写<strong>NBUT Virtual Judge</strong>的内核框架，用的又是Node.JS了，把它当作一个本地运行的脚本不断进行轮询。</p>
+<p>众所周知JS中的一个精髓就是<strong>异步回调</strong>。</p>
+<p>所以在我自己写的框架中也经常会出现类似于下面的代码：</p>
+<div class="highlight"><pre><code class="js"><span class="nx">foo</span><span class="p">.</span><span class="nx">bar</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</code></pre></div>
 
 
+<p>总而言之就是写一个函数，这个函数将会调用一个回调函数。</p>
+<p>那么如果我们想在<code>function</code>中也用<code>this</code>来指代这个<code>foo</code>对象该怎么办呢？</p>
+<p>结果还是IRC有用。本人跑Node.JS的IRC上问了这个问题，结果有人就这样回复我了：</p>
+<blockquote>
+<p>13:07 &lt; shama&gt; xadillax: foo(a, b callback.bind(foo))</p>
+<p>13:10 &lt; olalonde&gt; foo (a, b fn) { fn = fn.bind(this); …. }</p>
+</blockquote>
+<p>然后还很热心地给了我个网址：https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind</p>
+<p>总之最后得出的结论就是说：</p>
+<p>你只要给你的callback函数指定一个this指针即可。</p>
+<p>如：</p>
+<div class="highlight"><pre><code class="js"><span class="kd">var</span> <span class="nx">cb</span> <span class="o">=</span> <span class="nx">callback</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">foo</span><span class="p">);</span>
+<span class="nx">foo</span><span class="p">.</span><span class="nx">bar</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">cb</span><span class="p">);</span>
+</code></pre></div>
 
 
-
-  
-    
-    
-    
-    
-  
-    
-      <h2>2013</h2>
-      <h3>September</h3>
-      <ul>
-    
-  
-    <li><span>September  8, 2013</span> &raquo; <a href="/programming/2013/09/08/openstack-terminology">OpenStack术语 [译]</a></li>
-  
-    
-          
-        
-          </ul>
-          <h3>August</h3>
-          <ul>
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>August 31, 2013</span> &raquo; <a href="/programming/2013/08/31/srm-589-div2">TopCoder SRM 589 DIV 2</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>August 16, 2013</span> &raquo; <a href="/node-learning/2013/08/16/node-3-base">一起撸Node.JS（壹）——基本语法和类型</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>August 15, 2013</span> &raquo; <a href="/node-learning/2013/08/15/node-2-environment-in-windows">一起撸Node.JS（负贰）——环境</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>August 13, 2013</span> &raquo; <a href="/node-learning/2013/08/13/node-1-summary">一起撸Node.JS（负叁）——概述</a></li>
-  
-    
-          
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>August  8, 2013</span> &raquo; <a href="/programming/2013/08/08/iocp-learning-note">IOCP学习笔记（未完待续）</a></li>
-  
-    
-          
-        
-          </ul>
-          <h3>July</h3>
-          <ul>
-        
-      
-    
-  
-    
-    
-    
-    
-  
-    
-  
-    <li><span>July 15, 2013</span> &raquo; <a href="/programming/2013/07/15/javascript-in-function-this-pointer-repoint">关于JavaScript中callback函数的this指针重定义</a></li>
-  
-    
-      </ul>
-    
-  
-
-
+<p>这样就能在回调函数中使用<code>foo</code>来作为其<code>this</code>指针了。</p>
 
     </article>
 </div>
@@ -189,9 +108,19 @@
 <div class="gridcol-1">
     
 
+    
+    <span class="fr"><a class="pagination" href="/programming/2013/08/08/iocp-learning-note" title="IOCP学习笔记（未完待续）">下一篇</a></span>
+    
+
+    <div class="cl"></div>
+</div>
+
+<div class="gridcol-1">
+    
+
 
   <!-- Duoshuo Comment BEGIN -->
-<div class="ds-thread" data-thread-key="archive" data-title="存档"></div>
+<div class="ds-thread" data-thread-key="/programming/2013/07/15/javascript-in-function-this-pointer-repoint" data-title="关于JavaScript中callback函数的this指针重定义"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"xadillax"};
 (function() {
