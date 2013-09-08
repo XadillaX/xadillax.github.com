@@ -370,3 +370,16 @@ a.pagination {
 a.pagination:hover {
     text-decoration: underline;
 }
+
+table {
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+thead tr.head {
+    background-color: #ddd;
+}
+
+table tr td, table tr th {
+    padding: 5px;
+}
